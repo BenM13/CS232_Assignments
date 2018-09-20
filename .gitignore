@@ -1,0 +1,7 @@
+*.class
+.DS_Store
+*.info
+*.ol
+pwd
+*.xlsx
+*.log*
