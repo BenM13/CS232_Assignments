@@ -2,6 +2,8 @@ public class ExpenseReport
 {
     public static void main(String[] args)
     {
+        double startingBalance, payRate, utilities, rent, groceries, other;
+        int hoursWorked;
         Person benjy = new Person();
 
         System.out.println("Welcome to your weekly personal expense report.");
@@ -11,10 +13,20 @@ public class ExpenseReport
         
         benjy.parseFirstName();
         benjy.parseLastName();
-
-        System.out.println("My name is: " + benjy.getFirstName()
-                            + " " + benjy.getLastName());
-
+    
         benjy.inputExpenses();
+        startingBalance = benjy.getStartingBalance();
+        payRate = benjy.getPayRate();
+        utilities = benjy.getUtilities();
+        rent = benjy.getRent();
+        hoursWorked = benjy.getHoursWorked();
+        groceries = benjy.getGroceries();
+        other = benjy.getOther();
+
+
+
+        //System.out.println("My name is: " + benjy.getFirstName()
+        //                    + " " + benjy.getLastName());
+
     }
 }
