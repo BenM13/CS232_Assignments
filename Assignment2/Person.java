@@ -221,6 +221,11 @@ public class Person
         return lastName;
     }
 
+    public String getTaxStatus()
+    {
+        return taxStatus;
+    }
+
     public double getStartingBalance()
     {
         return startingBalance;
