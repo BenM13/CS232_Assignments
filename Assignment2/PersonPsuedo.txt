@@ -1,0 +1,86 @@
+public class Person
+
+    declare instance variables:
+    - FINAL regex pattern: String
+    - FINAL console prompt: String
+    - FINAL exit condition: String (1 characher exit condition always entered as a string)
+    - first name: String
+    - last name: String
+    - tax filing status: String
+    - expenses: gas, cable, grocies, and other: double
+    - hourly pay rate: double
+    - starting bank balance: double 
+    - number of hours worked: double
+
+    private void quitProgram()
+    {
+        print some exit message
+        System.exit(0);
+    }
+
+    public void parseFirstName()
+    {
+        print intructions
+        prompt for input
+        if input equals exit condition
+            quitProgram()
+        else if input matches regex
+            first name = input 
+        else   
+            print error message
+            repeat this method!
+    }
+
+    public void parseLastName()
+    {
+        print instructions
+        make an empty string
+        prompt for input
+        only take first letter of input
+        use a period as stop condition for last name loop
+        while input does not equal period (.)
+            if input equals program's exit condition
+                quitProgram();
+            else if input matches regex
+                add letter to empty string
+            else
+                print error message
+                repeat this method!
+        last name = name collected so far 
+    }
+    
+    private int/double check number
+    {
+        this function will check each numnber input
+        for validity. Numbers will always be inputed as a string
+        then we'll try to convert it
+        if input equals program stop condition
+            quitProgram()
+        else  
+            use a try catch
+            try to convert input to int or double
+            catch exception
+                print an error message
+                exit the program
+        return int or double
+    }
+
+NOTE ON CHECK NUMBER:
+If the user inputs something other than a number, the program will close
+but it will not crash like with the usual Java Exception message.  Instead it will print out an
+error message and inform the user that the program is exiting and say why. In the future
+I hope to be able to keep programs running and simply reprompt the user for input,
+but I'm quickly discovering that try catch in Java is not as simple as try except in Python
+
+    public void get expense input
+    {
+        prompt user for each variables
+        take input and pass it to check number method
+    }
+
+    access methods
+    {
+        all instance variables are private
+        I'll use access methods here to pass use them
+        in the main method. 
+    }

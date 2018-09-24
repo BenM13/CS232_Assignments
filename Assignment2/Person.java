@@ -141,6 +141,13 @@ public class Person
     }
 
     public void inputExpenses()
+    /*
+    Takes no arguments. Prompts user for each variable one by one.
+    For each variable, the input is passed to checkInt()/checkDouble() methods for validity. 
+    ALL INPUTS MUST BE INT OR DOUBLE   
+    This method currently cannot handle inputs that are non numeric.
+    The check methods will be able to print a more discriptive error message. 
+    */
     {
         System.out.println("\nHow much money did you have in your account");
         System.out.println("at the start of the week?");
@@ -180,6 +187,11 @@ public class Person
     }
 
     public void inputTaxStatus()
+    /*
+    Takes no arguments. Gives user a choice of three differnt tax statuses.
+    Uses a switch statement to assign taxStatus to corresponding input.
+    By default, method repeats if none of the three cases are met. 
+    */
     {
         System.out.println("\nEnter your tax status based on the guide below");
         System.out.println("Dependent: 1");
