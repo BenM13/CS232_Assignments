@@ -1,0 +1,24 @@
+public class ExpenseReport
+
+public static void main(String[] args)
+{
+    declare varialbes:
+        -these variables will match the variables in
+         Person class
+        - instantiate Person class
+        - set variables using access method
+    
+    Find max and min numbers
+        -create array of all inputs
+        -create variable max, set to first element of list
+        -loop through list, if next element is greater, that is set to max
+        -at end of loop, we'll have the max element
+
+        -for min, create variable min, set to first element of list
+        -loop through list, if next element is less, that is set to min
+        -at end of loop, we'll have the min element
+    
+    display report 
+        -calculate average
+        -print report     
+}

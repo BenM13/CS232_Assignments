@@ -189,6 +189,7 @@ public class Person
     public void inputTaxStatus()
     /*
     Takes no arguments. Gives user a choice of three differnt tax statuses.
+    NOTE: Exit condition will not work in this method
     Uses a switch statement to assign taxStatus to corresponding input.
     By default, method repeats if none of the three cases are met. 
     */
@@ -216,7 +217,8 @@ public class Person
                 inputTaxStatus();
                 break;
         }
-    }
+    }       
+
     
     /*
     All the access methods are listed below
@@ -227,32 +229,32 @@ public class Person
     {
         return firstName;
     }
-
+    
     public String getLastName()
     {
         return lastName;
     }
-
+    
     public String getTaxStatus()
     {
         return taxStatus;
     }
-
+    
     public double getStartingBalance()
     {
         return startingBalance;
     }
-
+    
     public double getUtilities()
     {
         return utilities;
     }
-
+    
     public double getRent()
     {
         return rent;
     }
-
+    
     public double getOther()
     {
         return other;
@@ -272,6 +274,4 @@ public class Person
     {
         return payRate;
     }
-
-
 }

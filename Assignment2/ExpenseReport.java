@@ -67,18 +67,20 @@ public class ExpenseReport
         double avg = (startingBalance + payRate + utilities + rent + hoursWorked + groceries + other
                      / numInputs);
 
+        
+        // displays report
         System.out.println("Maximum: " + max);
         System.out.println("Minimum:" + min);
 
         System.out.print("\nWeekly Expense Report. OWNER: " + benjy.getFirstName() +
                             " " + benjy.getLastName());
         System.out.println("  TAX STATUS: " + benjy.getTaxStatus());
-        System.out.println("---------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------");
         System.out.println("Input details:");
         System.out.println("NUMBER OF INPUTS |  HIGHEST NUMBER  |  LOWEST NUMBER   |      TOTAL       | AVERAGE NUMBER");
         System.out.println(numInputs + "                   " + max + "                 " + min + "                  " 
                             + total + "                " + Math.round(avg));
-        System.out.println("---------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------");
         System.out.println("Expense breakdown");
         System.out.println("Starting Balance: $" + startingBalance);
         System.out.println("Total expenses: $" + (rent + utilities + groceries + other));
