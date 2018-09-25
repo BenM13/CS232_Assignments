@@ -69,9 +69,6 @@ public class ExpenseReport
 
         
         // displays report
-        System.out.println("Maximum: " + max);
-        System.out.println("Minimum:" + min);
-
         System.out.print("\nWeekly Expense Report. OWNER: " + benjy.getFirstName() +
                             " " + benjy.getLastName());
         System.out.println("  TAX STATUS: " + benjy.getTaxStatus());
