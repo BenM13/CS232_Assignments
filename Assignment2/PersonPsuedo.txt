@@ -10,7 +10,7 @@ public class Person
     - expenses: gas, cable, grocies, and other: double
     - hourly pay rate: double
     - starting bank balance: double 
-    - number of hours worked: double
+    - number of hours worked: int
 
     private void quitProgram()
     {

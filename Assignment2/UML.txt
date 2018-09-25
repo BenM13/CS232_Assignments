@@ -1,0 +1,31 @@
+CLASS NAME: Person
+    -Attributes:
+        --first name: String
+        --last name: String
+        --tax filing status: String
+        --Expenses: double
+        --pay rate: double
+        --starting balance: double
+        --hours worked: int
+    
+    -Methods:
+        --quit Program (): void
+        --parse first name (): void
+        --parse last name (): void
+        --check number (): return int/double
+        --get varialbes: return variable type
+
+
+CLASS NAME: ExpenseReport
+    Attribures:
+        --first name: String
+        --last name: String
+        --tax filing status: String
+        --Expenses: double
+        --pay rate: double
+        --starting balance: double
+        --hours worked: int
+        (All these will be obtained using the access methods)
+    
+    Methods
+        --Main: calculate min/max/average and display report
