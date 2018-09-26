@@ -1,0 +1,23 @@
+Bad cases:
+
+in parseLastName()
+    This method takes a substring of the input so that
+    only the first letter entered is accpeted.
+    Even if the user enters junk, it will still accept it and
+    compare the first letter to the regular expression.
+    HOWEVER, if the user does not provide any input and just 
+    hits enter, the program will take that in as a blank string 
+    and will throw StringIndexOutOfBoundsException
+
+in checkDouble() and checkInt()
+    These methods check any numerical input to make sure they are
+    actually numbers. Although there is a try-catch statement, this will
+    simply catch the error and print out a nice a more cohesive error message
+    and call the quitProgram() method. In other words, if the user types in
+    anything other than a number, Java will through a NumberFormatException
+    but instead of crashing, it will exit the program via quitProgram()
+
+in inputTaxStatus()
+    This method will only except integers. Exceptions will not be caught.
+    If the user enters anything other than an integer, the program will crash 
+    and Java will throw InputMismatchException.
