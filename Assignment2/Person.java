@@ -64,7 +64,8 @@ public class Person
         System.out.println("When you're done, " +
                            "type a period (.) followed by ENTER");
         System.out.print(PROMPT);
-        nextLetter = keyboard.nextLine().substring(0, 1); // only takes first letter of input
+        // only takes first letter of input
+        nextLetter = keyboard.nextLine().substring(0, 1); 
         while (!(nextLetter.equals(".")))
         {
             if (nextLetter.equals(EXIT))
@@ -78,7 +79,8 @@ public class Person
                 System.out.println("ERROR: Invalid character(s)");
                 System.out.println("Name cannot contain spaces, number, " +
                                    "or special characters");
-                parseLastName();
+                System.out.print(PROMPT);
+                nextLetter = keyboard.nextLine().substring(0, 1);
             }
         }
         lastName = nameSoFar;
