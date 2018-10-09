@@ -1,10 +1,14 @@
+import java.util.Scanner;
 import java.lang.NumberFormatException;
+import java.lang.StringIndexOutOfBoundsException;
 
 public class Utilities
 {
     private static int newInt; // for use with checkInt and convertInt
+    private static char newChar;
+    private static final String PROMPT = "--> ";
 
-    public static void quitProgram();
+    public static void quitProgram()
     /*
     Safely exits the program without an error message
     */
@@ -24,41 +28,45 @@ public class Utilities
         System.exit(0);
     }
 
-    public static boolean checkInt(String input)
+    public static char inputChar()
     /*
-    Checks whether a string can be converted to an int
-    using a try-catch.
-    Returns false if a NumberFormatException is caug vht.
-    Otherwise returns true. 
+    Prompts user for a letter, takes input as a string
+    Converts string to all uppercase. Tries to take character at
+    position 0. If the index is out of bound (i.e. user types in nothing
+    and hits ENTER anyways) returns an exclamation mark '!' char.
     */
     {
+        System.out.print(PROMPT);
+        Scanner keyboard = new Scanner(System.in);
+        String inputString = keyboard.nextLine().toUpperCase();
+        char input; // throw-away variable for try block
         try
         {
-            newInt = Integer.parseInt(input);
+            newChar = inputString.charAt(0);
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("ERROR: Invalid input.");
+            return '!';
         }
-        catch (NumberFormatException e)
-        {
-            System.out.println("ERROR: Invalid input");
-            return false;
-        }
-        return true;
+        return newChar;
     }
 
-    public static int convertToInt(String input)
+    public static int inputInt()
     /*
-    Checks whether a string can be converted to an int
-    using a try-catch.
-    Converts string and returns int if it passes the try block.
-    Calls quitProgram() if test fails. 
+    Prompts user for an integer. Takes input as a string.
+    Tries to convert string to an int. Returns 0 if string can't
+    be converted. Otherwise, returns the input as an int. 
     */
     {
+        System.out.print(PROMPT);
+        Scanner keyboard = new Scanner(System.in);
+        String inputString = keyboard.nextLine();
+        System.out.println();
         try
         {
-            newInt = Integer.parseInt(input);
-        }
-        catch (NumberFormatException e)
-        {
-            quitProgram("Invalid input.");
+            newInt = Integer.parseInt(inputString);
+        } catch (NumberFormatException e) {
+            System.out.println("ERROR: Invalid input");
+            return 0;
         }
         return newInt;
     }

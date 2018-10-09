@@ -4,11 +4,16 @@ public class Item
     private double price;
     private int priority;
 
-    public Item (String initName, double initPrice, int initPriority)
+    public Item(String initName, double initPrice)
     {
         name = initName;
         price = initPrice;
-        priority = initPriority;
+        priority = 0;
+    }
+
+    public void setPriority(int newPriority)
+    {
+        priority = newPriority;
     }
 
     public String getName()

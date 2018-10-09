@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 public class ShoppingList
 {
-    public int priority;
-    public final String PROMPT = "--> ";
-
     public static void main(String[] args)
     {
+        int priority;
+        final String PROMPT = "--> ";
+
         System.out.println("Welcome to the Mountain-side Ski Shop!");
         System.out.println("Check out our products/shop services listed below:");
         System.out.println("-----------------------");
@@ -19,16 +19,15 @@ public class ShoppingList
         System.out.println("G) Ski binding adjustment: $10.00");
         System.out.println("H) Ski edge sharpening: $15.00");
         System.out.println("I) Ski wax: $12.00");
-        System.out.println("J) Cup of hot chocolate: $2.00");
+        System.out.println("J) Daily locker rental: $7.00");
 
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Which item would you like?");
-        System.out.print(PROMPT);
-        char choice = keyboard.nextChar();
+        System.out.println("Which item would you like?");System.out.println("Enter the letter corresponding to the item you want");
+        char choice = Utilities.inputChar();
         System.out.println("How badly do you need it?");
         System.out.println("Give a priority as a whole number");
         System.out.print(PROMPT);
-        int priority = keyboard.nextInt();
+        priority = keyboard.nextInt();
         
         // instantiate object based on item selection
         switch (choice) {
@@ -38,33 +37,43 @@ public class ShoppingList
                 break;
             case 'B':
                 Item helmet = new Item("Helmet", 35, priority);
-                System.out.println("You chose" + helmet.getName());
+                System.out.println("You chose " + helmet.getName());
                 break;
             case 'C':
-                // code
+                Item mask = new Item("Face mask", 12, priority);
+                System.out.println("You chose " + mask.getName());
                 break;
             case 'D':
-                // code
+                Item gloves = new Item("Gloves", 20, priority);
+                System.out.println("You chose " + gloves.getName());
                 break;
             case 'E':
-                // code
+                Item handWarmers = new Item("Hand warmers", 5, priority);
+                System.out.println("You chose " + handWarmers.getName());
                 break;
             case 'F':
-                // code
+                Item toeWarmers = new Item("Toe warmers", 5, priority);
+                System.out.println("You chose " + toeWarmers.getName());
                 break;
             case 'G':
-                // code
+                Item adjustment = new Item("Binding adjustment", 10, priority);
+                System.out.println("You chose " + adjustment.getName());
                 break;
             case 'H':
-                // code
+                Item sharpening = new Item("Edge sharpening", 15, priority);
+                System.out.println("You chose " + sharpening.getName());
                 break;
             case 'I':
-                // code
+                Item wax = new Item("Ski wax", 12, priority);
+                System.out.println("You chose " + wax.getName());
                 break;
             case 'J':
-                // code
+                Item locker = new Item("Locker rental", 7, priority);
+                System.out.println("You chose " + locker.getName());
                 break;
+            default:
+                Utilities.quitProgram("Invalid item input");
+                break;         
         }
-
     }
 }
