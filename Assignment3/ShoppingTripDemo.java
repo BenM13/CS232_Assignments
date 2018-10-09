@@ -4,7 +4,7 @@ public class ShoppingTripDemo
 {
     public static void main(String[] args)
     {
-        final int NUM_ITEMS = 2;
+        final int NUM_ITEMS = 7;
         Item[] itemList = new Item[NUM_ITEMS];
 
         System.out.println("Welcome to the Mountain-side Ski Shop!");
@@ -26,10 +26,11 @@ public class ShoppingTripDemo
         for (int i = 0; i < itemList.length; i++)
         {
             char choice;
-            do // repeats until user enters a valid character
+            do
             {
-                System.out.println("Enter a letter for item " + (i + 1));
+                System.out.println("\nEnter a letter for item " + (i + 1));
                 choice = Utilities.inputChar();
+            // inputchar() returns '!' if there is a problem with the input
             } while (choice == '!');
             switch (choice) {
                 case 'A':
@@ -67,13 +68,15 @@ public class ShoppingTripDemo
                     break;         
                 }
             System.out.println("You chose " + itemList[i].getName());
-            System.out.println("How badly do you need this item?");
+            System.out.println("\nHow badly do you need this item?");
             int priorityInput;
             do // repeats until user enters a valid int
             {
-                System.out.println("Enter this item's priority as a whole number");
-                System.out.println("(Lowest priority indicates highest priority");
+                System.out.println("Enter the priority for item " + (i + 1)
+                        + "as a whole number");
+                System.out.println("(Lowest priority indicates highest priority)");
                 priorityInput = Utilities.inputInt();
+            // inputInt() returns 0 if there is a problem with the input
             } while (priorityInput == 0);
             itemList[i].setPriority(priorityInput);
         }

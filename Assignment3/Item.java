@@ -16,6 +16,7 @@ public class Item
         priority = newPriority;
     }
 
+    // All access methods listed below
     public String getName()
     {
         return name;
