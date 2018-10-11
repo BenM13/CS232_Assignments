@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
-public class ShoppingTripDemo
+public class ShoppingTrip
 {
     public static void main(String[] args)
     {
-        final int NUM_ITEMS = 7;
+        final int NUM_ITEMS = 3;
         Item[] itemList = new Item[NUM_ITEMS];
 
         System.out.println("Welcome to the Mountain-side Ski Shop!");
@@ -26,7 +26,7 @@ public class ShoppingTripDemo
         for (int i = 0; i < itemList.length; i++)
         {
             char choice;
-            do
+            do // repeat prompt until user enters valid char
             {
                 System.out.println("\nEnter a letter for item " + (i + 1));
                 choice = Utilities.inputChar();
@@ -69,19 +69,28 @@ public class ShoppingTripDemo
                 }
             System.out.println("You chose " + itemList[i].getName());
             System.out.println("\nHow badly do you need this item?");
-            int priorityInput;
-            do // repeats until user enters a valid int
+            itemList[i].setPriority();
+        }
+
+        // compare each item in array to every other item
+        for (int i = 0; i < itemList.length; i++) 
+        {
+            for (int k = i + 1; k < itemList.length; k++)
             {
-                System.out.println("Enter the priority for item " + (i + 1)
-                        + "as a whole number");
-                System.out.println("(Lowest priority indicates highest priority)");
-                priorityInput = Utilities.inputInt();
-            // inputInt() returns 0 if there is a problem with the input
-            } while (priorityInput == 0);
-            itemList[i].setPriority(priorityInput);
+                if (itemList[i].isDuplicate(itemList[k]))
+                {
+                    System.out.println("Oops! There's a problem.");
+                    System.out.println("The items " + itemList[i].getName() +
+                                       " and " + itemList[k].getName());
+                    System.out.println("have either the same name or priority.");
+                }
+            }
         }
 
         for (int i = 0; i < itemList.length; i++)
+        /*
+        Test printing
+        */
         {
             System.out.print("Item " + (i + 1) + ": ");
             System.out.println(itemList[i].getName());
