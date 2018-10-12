@@ -58,11 +58,12 @@ public class Item
     /*
     Loops through the list of Items that have been created so far.
     Checks for duplicates. If item i and item k have the same name or priority,
-    user is prompted to change item k.
+    user is prompted to change item k by calling either setName or setPriority. 
+    Passes the item number (index + 1) to the set method. 
     Returns true if there were duplicate items, returns false otherwise. 
     */
     {
-        boolean hasDuplicates = false; //
+        boolean hasDuplicates = false; // assume no duplicates at first
         for (int i = 0; i < currentLength; i++)
         {
             for (int k = i + 1; k < currentLength; k++)
@@ -94,6 +95,8 @@ public class Item
 
     public void setPriority(int itemNumber)
     /*
+    Takes item number as an argument. This will be used to show which item
+    the user needs to change. itemNumber will always equal index + 1.
     Prompts user for an integer. Checks input to make sure it's valid
     Updates the value of priority. 
     */
