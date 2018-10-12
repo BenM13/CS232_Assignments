@@ -44,3 +44,18 @@ for (int i = 0; i < itemList.length; i ++)
                 Utilities.quitProgram("Invalid item input");
                 break;         
         }
+
+// compare each item in array to every other item
+        for (int i = 0; i < itemList.length; i++) 
+        {
+            for (int k = i + 1; k < itemList.length; k++)
+            {
+                if (itemList[i].isDuplicate(itemList[k]))
+                {
+                    System.out.println("Oops! There's a problem.");
+                    System.out.println("The items " + itemList[i].getName() +
+                                       " and " + itemList[k].getName());
+                    System.out.println("have either the same name or priority.");
+                }
+            }
+        }

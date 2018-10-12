@@ -72,9 +72,11 @@ public class Utilities
         {
             newInt = Integer.parseInt(inputString);
         } catch (NumberFormatException e) {
-            System.out.println("ERROR: Must enter a whole number.");
+            System.out.println("ERROR: Must enter a positive whole number.");
             return 0;
         }
+        if (newInt <= 0) // priority can't be negative
+            System.out.println("ERROR: Must enter a positive whole number.");
         return newInt;
     }
 }
