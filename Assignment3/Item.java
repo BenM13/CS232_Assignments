@@ -8,7 +8,7 @@ public class Item
     {
         name = initName;
         price = initPrice;
-        priority = 0;
+        priority = 0; // default. Will be changed later
     }
 
     private boolean nameEquals(Item differentItem)
@@ -55,6 +55,12 @@ public class Item
     }
 
     public boolean checkArray(Item[] currentList, int currentLength)
+    /*
+    Loops through the list of Items that have been created so far.
+    Checks for duplicates. If item i and item k have the same name or priority,
+    user is prompted to change item k.
+    Returns true if there were duplicate items, returns false otherwise. 
+    */
     {
         boolean hasDuplicates = false; //
         for (int i = 0; i < currentLength; i++)
@@ -64,21 +70,21 @@ public class Item
                 if (currentList[i].isDuplicate(currentList[k])) {
                     System.out.println("ERROR: Items # " + (i + 1) + " and " + (k + 1));
                     System.out.println("have the same name and priority");
-                    currentList[i].setName();
+                    currentList[k].setName(i + 1);
                     System.out.println("Please change the priority");
-                    currentList[i].setPriority();
+                    currentList[k].setPriority(k + 1);
                     hasDuplicates = true;
                 }
                 else if (currentList[i].nameEquals(currentList[k])) {
                     System.out.println("ERROR: Items # " + (i + 1) + " and " + (k + 1));
                     System.out.println("have the same name.");
-                    currentList[i].setName();
+                    currentList[k].setName(k + 1);
                     hasDuplicates = true;
                 } else if (currentList[i].priorityEquals(currentList[k])) {
                     System.out.println("ERROR: Items # " + (i + 1) + " and " + (k + 1));
                     System.out.println("have the same priority.");
                     System.out.println("Please change the priority.");
-                    currentList[i].setPriority();
+                    currentList[k].setPriority(k + 1);
                     hasDuplicates = true;
                 }
             }
@@ -86,7 +92,7 @@ public class Item
         return hasDuplicates;        
     }
 
-    public void setPriority()
+    public void setPriority(int itemNumber)
     /*
     Prompts user for an integer. Checks input to make sure it's valid
     Updates the value of priority. 
@@ -95,8 +101,8 @@ public class Item
         int priorityInput;
         do // repeats prompt until user enters a valid int
         {
-            System.out.println("Enter the priority for this item"
-                               + " as a whole number");
+            System.out.println("Enter the priority for item # " + itemNumber +
+                            " as a whole number");
             System.out.println("(Lower number indicates higher priority)");
             priorityInput = Utilities.inputInt();
         // Utilities.inputInt() returns 0 if there is a problem with the input
@@ -104,7 +110,7 @@ public class Item
         priority = priorityInput;
     }
 
-    public void setName()
+    public void setName(int itemNumber)
     /*
     Prompts user to choose a different item.
     This method is called if checkArray detects a duplicate.
@@ -115,8 +121,8 @@ public class Item
     better having come from Python, ok?
     */
     {
-        System.out.println("Please select a different item that " +
-                           "has not been already been used.");
+        System.out.println("Please select a different option " +
+                           "for item # " + itemNumber);
         System.out.println("Refer to the options menu at the top.");
         char choice;
         do // repeat prompt until user enters valid char

@@ -59,3 +59,22 @@ for (int i = 0; i < itemList.length; i ++)
                 }
             }
         }
+
+
+public void checkArray(Item[] currentList, int currentLength)
+    {
+        for (int i = 0; i < currentLength; i++)
+        {
+            for (int k = i + 1; k < currentLength; k++)
+            {
+                if (currentList[i].nameEquals(currentList[k]))
+                {
+                    System.out.println("ERROR: Items # " + (i + 1) + " and " + (k + 1));
+                    System.out.println("have the same name.");
+                } else if (currentList[i].priorityEquals(currentList[k])) 
+                    System.out.println("ERROR: Items # " + (i + 1) + " and " + (k + 1));
+                    System.out.println("have the same priority.");
+                }
+            }        
+        }
+    }

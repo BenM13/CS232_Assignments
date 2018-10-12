@@ -4,7 +4,7 @@ public class ShoppingTrip
 {
     public static void main(String[] args)
     {
-        final int NUM_ITEMS = 2;
+        final int NUM_ITEMS = 3; // REMEMBER: Set this to 7 for final version!!
         Item[] itemList = new Item[NUM_ITEMS];
 
         System.out.println("Welcome to the Mountain-side Ski Shop!");
@@ -20,7 +20,8 @@ public class ShoppingTrip
         System.out.println("H) Ski edge sharpening: $14.97");
         System.out.println("I) Ski wax: $10.99");
         System.out.println("J) Daily locker rental: $6.89");
-        
+        System.out.println("-----------------------");
+        System.out.println("Pick " + NUM_ITEMS + " things you want to get.");
         System.out.println("Please enter a letter corersponding to the "
                            + "item you wish to purchase");
         // create item objects one by one
@@ -70,9 +71,9 @@ public class ShoppingTrip
                 }
             System.out.println("You chose " + itemList[i].getName());
             System.out.println("\nHow badly do you need this item?");
-            itemList[i].setPriority();
+            itemList[i].setPriority(i + 1);
             while (itemList[i].checkArray(itemList, (i + 1))); {
-                checkArray(itemList, (i + 1));
+                itemList[i].checkArray(itemList, (i + 1));
             }
         }
 
