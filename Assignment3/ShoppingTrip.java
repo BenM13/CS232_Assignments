@@ -7,6 +7,8 @@ public class ShoppingTrip
         final int NUM_ITEMS = 3; // REMEMBER: Set this to 7 for final version!!
         Item[] shoppingCart = new Item[NUM_ITEMS];
         Item[] sortedCart = new Item[NUM_ITEMS];
+        Item[] purchased = new Item[NUM_ITEMS];
+        Item[] notPurchased = new Item[NUM_ITEMS];
         int[] priorityList = new int[NUM_ITEMS];
         double balance = 59; // start with $59.00 to spend
         int numPurchased = 0; // total number of items purchaed
@@ -29,7 +31,10 @@ public class ShoppingTrip
         System.out.println("Pick " + NUM_ITEMS + " things you want to get.");
         System.out.println("Please enter a letter corersponding to the "
                            + "item you wish to purchase");
-        // create item objects one by one
+        
+        /*
+        create item objects one by one
+        */
         for (int i = 0; i < NUM_ITEMS; i++)
         {
             char choice;
@@ -85,11 +90,32 @@ public class ShoppingTrip
         priorityList = Utilities.sortPriority(shoppingCart);
         sortedCart = Utilities.sortShoppingCart(shoppingCart, priorityList);
 
-        // Test Print
-        for (int i = 0; i < NUM_ITEMS; i++)
+        for (int i = 0; i < sortedCart.length; i++)
         {
-            System.out.println("Item " + (i + 1) + " " + sortedCart[i].getName());
-            System.out.println("Priority: " + sortedCart[i].getPriority());
+            if (balance >= sortedCart[i].getPrice())
+            {
+                balance -= sortedCart[i].getPrice();
+                purchased[numPurchased] = sortedCart[i];
+                numPurchased++;
+            } else {
+                notPurchased[numNotPurchased] = sortedCart[i];
+                numNotPurchased++;
+            }
         }
+        
+        // print purchased items
+        System.out.println("You purchased:");
+        for (int i = 0; i < numPurchased; i++)
+        {
+            System.out.println((i + 1) + ") " + purchased[i].getName());
+        }
+
+        // print items not purchased
+        System.out.println("\nYou did not have enough money for:");
+        for (int i = 0; i < numNotPurchased; i++)
+        {
+            System.out.println((i + 1) + ") " + notPurchased[i].getName());
+        }
+        
     }
 }

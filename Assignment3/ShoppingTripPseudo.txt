@@ -35,3 +35,16 @@ do {
         {
             System.out.println((i + 1) + ") " + purchased[i]);
         }
+
+if ((currentPriority == shoppingCart[k].getPriority())
+                     && (balance >= shoppingCart[k].getPrice())) 
+                {
+                    balance -= shoppingCart[k].getPrice();
+                    purchased[i] = shoppingCart[k];
+                    numPurchased++;
+                } else if ((currentPriority == shoppingCart[k].getPriority())
+                                 && (balance < shoppingCart[k].getPrice())) 
+                {
+                    notPurchased[i] = shoppingCart[k];
+                    numNotPurchased++;
+                }
