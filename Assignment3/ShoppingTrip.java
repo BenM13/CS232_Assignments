@@ -4,7 +4,7 @@ public class ShoppingTrip
 {
     public static void main(String[] args)
     {
-        final int NUM_ITEMS = 3; // REMEMBER: Set this to 7 for final version!!
+        final int NUM_ITEMS = 7;
         Item[] shoppingCart = new Item[NUM_ITEMS];
         Item[] sortedCart = new Item[NUM_ITEMS];
         Item[] purchased = new Item[NUM_ITEMS];
@@ -33,7 +33,9 @@ public class ShoppingTrip
                            + "item you wish to purchase");
         
         /*
-        create item objects one by one
+        Create Item objects one by one. Prompts user to enter a letter. 
+        Checks that letter is valid. If valid creates Item object with appropriate
+        name and price variables according to switch statement. 
         */
         for (int i = 0; i < NUM_ITEMS; i++)
         {
@@ -85,6 +87,9 @@ public class ShoppingTrip
             while (shoppingCart[i].checkArray(shoppingCart, (i + 1))); {
                 shoppingCart[i].checkArray(shoppingCart, (i + 1));
             }
+            System.out.print("Successfully added " + shoppingCart[i].getName() +
+                               " with priority " + shoppingCart[i].getPriority());
+            System.out.println(" to cart.");
         }
 
         priorityList = Utilities.sortPriority(shoppingCart);
@@ -104,10 +109,14 @@ public class ShoppingTrip
         }
         
         // print purchased items
+        System.out.println("\nYour starting balance was $59.00");
         System.out.println("You purchased:");
         for (int i = 0; i < numPurchased; i++)
         {
             System.out.println((i + 1) + ") " + purchased[i].getName());
+            System.out.print("\t@ ");
+            Utilities.writeMoney(purchased[i].getPrice());
+            System.out.println();
         }
 
         // print items not purchased
@@ -115,7 +124,14 @@ public class ShoppingTrip
         for (int i = 0; i < numNotPurchased; i++)
         {
             System.out.println((i + 1) + ") " + notPurchased[i].getName());
+            System.out.print("\t@ ");
+            Utilities.writeMoney(notPurchased[i].getPrice());
+            System.out.println();
         }
-        
+
+        // print leftover balance
+        System.out.print("\nYour remaining balance is ");
+        Utilities.writeMoney(balance);
+        System.out.println("\n");
     }
 }

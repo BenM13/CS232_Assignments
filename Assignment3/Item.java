@@ -69,20 +69,20 @@ public class Item
             for (int k = i + 1; k < currentLength; k++)
             {
                 if (currentList[i].isDuplicate(currentList[k])) {
-                    System.out.println("ERROR: Items # " + (i + 1) + " and " + (k + 1));
+                    System.out.println("ERROR: Items #" + (i + 1) + " and #" + (k + 1));
                     System.out.println("have the same name and priority");
-                    currentList[k].setName(i + 1);
+                    currentList[k].setName(k + 1);
                     System.out.println("Please change the priority");
                     currentList[k].setPriority(k + 1);
                     hasDuplicates = true;
                 }
                 else if (currentList[i].nameEquals(currentList[k])) {
-                    System.out.println("ERROR: Items # " + (i + 1) + " and " + (k + 1));
+                    System.out.println("ERROR: Items #" + (i + 1) + " and #" + (k + 1));
                     System.out.println("have the same name.");
                     currentList[k].setName(k + 1);
                     hasDuplicates = true;
                 } else if (currentList[i].priorityEquals(currentList[k])) {
-                    System.out.println("ERROR: Items # " + (i + 1) + " and " + (k + 1));
+                    System.out.println("ERROR: Items #" + (i + 1) + " and #" + (k + 1));
                     System.out.println("have the same priority.");
                     System.out.println("Please change the priority.");
                     currentList[k].setPriority(k + 1);
@@ -104,7 +104,7 @@ public class Item
         int priorityInput;
         do // repeats prompt until user enters a valid int
         {
-            System.out.println("Enter the priority for item # " + itemNumber +
+            System.out.println("Enter the priority for item #" + itemNumber +
                             " as a whole number");
             System.out.println("(Lower number indicates higher priority)");
             priorityInput = Utilities.inputInt();
@@ -125,7 +125,7 @@ public class Item
     */
     {
         System.out.println("Please select a different option " +
-                           "for item # " + itemNumber);
+                           "for item #" + itemNumber);
         System.out.println("Refer to the options menu at the top.");
         char choice;
         do // repeat prompt until user enters valid char
