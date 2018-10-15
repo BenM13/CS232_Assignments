@@ -1,0 +1,37 @@
+- call SortPriority()
+
+
+
+-- Let's go shopping!
+int numPurchased = 0
+do
+{
+    for i in priorityList
+    {
+        currentPriority = priorityList[i]
+        for k in itemList:
+            if (currentPriority == itemList[k].getPriority()):
+                balance -= itemList[k].getPrice(); // deduct price from balance
+                purchased[i] = itemList[k].getName();
+                numPurchased++;
+    }
+} while (balance >= 0);
+
+do {
+            for (int i = 0; i < priorityList.length; i++) {
+                currentPriority = priorityList[i];
+                for (int k = 0; k < itemList.length; k++) {
+                   if (currentPriority == itemList[k].getPriority()) {
+                       balance -= itemList[k].getPrice();
+                       purchased[i] = itemList[k].getName();
+                       numPurchased++;
+                   }
+                }
+            }
+        } while (balance >= 0);
+
+        // Test Print
+        for (int i = 0; i < numPurchased; i++)
+        {
+            System.out.println((i + 1) + ") " + purchased[i]);
+        }

@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.util.Arrays;
 import java.lang.NumberFormatException;
 import java.lang.StringIndexOutOfBoundsException;
 
@@ -78,5 +79,37 @@ public class Utilities
         if (newInt <= 0) // priority can't be negative
             System.out.println("ERROR: Must enter a positive whole number.");
         return newInt;
+    }
+
+    public static int[] sortPriority(Item[] currentList)
+    /*
+    Creates an int array of priorities corresponding to the user-inputed prioriteies
+    of the Item objects. Must provide Item list as an argument.
+    Sorts the array in ascending order. Returns the newly created array. 
+    */
+    {
+        int[] itemPriority = new int[currentList.length];
+        for (int i = 0; i < currentList.length; i++)
+        {
+            itemPriority[i] = currentList[i].getPriority();
+        }
+        Arrays.sort(itemPriority);
+        return itemPriority;
+    }
+
+    public static Item[] sortShoppingCart(Item[] cart, int[] priorityArray)
+    {
+        Item[] sortedItems = new Item[cart.length];
+        int currentPriority;
+        for (int i = 0; i < priorityArray.length; i++)
+        {
+            currentPriority = priorityArray[i];
+            for (int k = 0; k < cart.length; k++) // search for matching priority
+            {
+                if (currentPriority == cart[k].getPriority())
+                    sortedItems[i] = cart[k];
+            }
+        }
+        return sortedItems;
     }
 }

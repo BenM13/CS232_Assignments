@@ -5,3 +5,4 @@
 pwd
 *.xlsx
 *.log*
+*.json
