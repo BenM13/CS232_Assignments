@@ -44,3 +44,37 @@ for (int i = 0; i < itemList.length; i ++)
                 Utilities.quitProgram("Invalid item input");
                 break;         
         }
+
+// compare each item in array to every other item
+        for (int i = 0; i < itemList.length; i++) 
+        {
+            for (int k = i + 1; k < itemList.length; k++)
+            {
+                if (itemList[i].isDuplicate(itemList[k]))
+                {
+                    System.out.println("Oops! There's a problem.");
+                    System.out.println("The items " + itemList[i].getName() +
+                                       " and " + itemList[k].getName());
+                    System.out.println("have either the same name or priority.");
+                }
+            }
+        }
+
+
+public void checkArray(Item[] currentList, int currentLength)
+    {
+        for (int i = 0; i < currentLength; i++)
+        {
+            for (int k = i + 1; k < currentLength; k++)
+            {
+                if (currentList[i].nameEquals(currentList[k]))
+                {
+                    System.out.println("ERROR: Items # " + (i + 1) + " and " + (k + 1));
+                    System.out.println("have the same name.");
+                } else if (currentList[i].priorityEquals(currentList[k])) 
+                    System.out.println("ERROR: Items # " + (i + 1) + " and " + (k + 1));
+                    System.out.println("have the same priority.");
+                }
+            }        
+        }
+    }

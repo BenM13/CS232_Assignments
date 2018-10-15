@@ -5,10 +5,10 @@ import java.lang.StringIndexOutOfBoundsException;
 
 public class Utilities
 {
-    private static int newInt; // for use with checkInt and convertInt
-    private static char newChar;
+    private static int newInt; // for use with inputInt()
+    private static char newChar; // for use with inputChar()
     private static final String PROMPT = "--> ";
-    private static final String REGEX = "[A-J]";
+    private static final String REGEX = "[A-J]"; // pattern for regular expression. 
 
     public static void quitProgram()
     /*
@@ -72,9 +72,11 @@ public class Utilities
         {
             newInt = Integer.parseInt(inputString);
         } catch (NumberFormatException e) {
-            System.out.println("ERROR: Must enter a whole number.");
+            System.out.println("ERROR: Must enter a positive whole number.");
             return 0;
         }
+        if (newInt <= 0) // priority can't be negative
+            System.out.println("ERROR: Must enter a positive whole number.");
         return newInt;
     }
 }
