@@ -80,7 +80,8 @@ public class ShoppingTrip
             System.out.println("You chose " + shoppingCart[i].getName());
             System.out.println("\nHow badly do you need this item?");
             shoppingCart[i].setPriority(i + 1);
-            while (shoppingCart[i].checkArray(shoppingCart, (i + 1))); {
+            while (shoppingCart[i].checkArray(shoppingCart, (i + 1))); 
+            {
                 shoppingCart[i].checkArray(shoppingCart, (i + 1));
             }
             System.out.print("Successfully added " + shoppingCart[i].getName() +

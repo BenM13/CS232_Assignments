@@ -6,6 +6,11 @@ public class Item
     private boolean purchased;
 
     public Item(String initName, double initPrice)
+    /*
+    Class constructor. Variables priority and purchased each have
+    a default value and will be modified later with their respective
+    set methods. 
+    */
     {
         name = initName;
         price = initPrice;
