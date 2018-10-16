@@ -3,7 +3,7 @@
 For this example I entered the items in the order they were initially printed on the menu
 I entered 'A' for item 1, and '1' for priority, then 'B' for item 2 and '2' for priority and so on.
 The helmet is the most expensive item at $34.95 (a bargain by the way, real ski helmets go for a $100+)
-Goggles will be purchased 1st as they had the highest priority. At this point, we're already can't afford
+Goggles will be purchased 1st as they had the highest priority. At this point, we already can't afford
 to buy the helmet so the program will skip over it. However, the purchasing loop does not stop, 
 it will continue to try to purchase other items from the list as long as there is enough money. In this
 case, we did not have enough money for the helmet, so the program continued to the item at priority 3.
