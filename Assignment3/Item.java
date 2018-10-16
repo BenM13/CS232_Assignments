@@ -3,12 +3,19 @@ public class Item
     private String name;
     private double price;
     private int priority;
+    private boolean purchased;
 
     public Item(String initName, double initPrice)
+    /*
+    Class constructor. Variables priority and purchased each have
+    a default value and will be modified later with their respective
+    set methods. 
+    */
     {
         name = initName;
         price = initPrice;
         priority = 0; // default. Will be changed later
+        purchased = false; // default
     }
 
     private boolean nameEquals(Item differentItem)
@@ -189,6 +196,14 @@ public class Item
         price = newPrice;
     }
 
+    public void setPurchased(boolean bought)
+    /*
+    Updates the purchased status of an item
+    */
+    {
+        purchased = bought;
+    }
+
     // All access methods listed below
     public String getName()
     {
@@ -203,5 +218,10 @@ public class Item
     public int getPriority()
     {
         return priority;
+    }
+
+    public boolean getPurchased()
+    {
+        return purchased;
     }
 }

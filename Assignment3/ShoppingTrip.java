@@ -7,12 +7,8 @@ public class ShoppingTrip
         final int NUM_ITEMS = 7;
         Item[] shoppingCart = new Item[NUM_ITEMS];
         Item[] sortedCart = new Item[NUM_ITEMS];
-        Item[] purchased = new Item[NUM_ITEMS];
-        Item[] notPurchased = new Item[NUM_ITEMS];
         int[] priorityList = new int[NUM_ITEMS];
         double balance = 59; // start with $59.00 to spend
-        int numPurchased = 0; // total number of items purchaed
-        int numNotPurchased = 0; // total number of items not purchased due to budget
 
         System.out.println("Welcome to the Mountain-side Ski Shop!");
         System.out.println("Check out our products/shop services listed below:");
@@ -44,7 +40,7 @@ public class ShoppingTrip
             {
                 System.out.println("\nEnter a letter for item " + (i + 1));
                 choice = Utilities.inputChar();
-            // inputchar() returns '!' if there is a problem with the input
+            // inputChar() returns '!' if there is a problem with the input
             } while (choice == '!');
             switch (choice) {
                 case 'A':
@@ -84,7 +80,8 @@ public class ShoppingTrip
             System.out.println("You chose " + shoppingCart[i].getName());
             System.out.println("\nHow badly do you need this item?");
             shoppingCart[i].setPriority(i + 1);
-            while (shoppingCart[i].checkArray(shoppingCart, (i + 1))); {
+            while (shoppingCart[i].checkArray(shoppingCart, (i + 1))); 
+            {
                 shoppingCart[i].checkArray(shoppingCart, (i + 1));
             }
             System.out.print("Successfully added " + shoppingCart[i].getName() +
@@ -92,6 +89,7 @@ public class ShoppingTrip
             System.out.println(" to cart.");
         }
 
+        // create priority array and sort the shopping cart
         priorityList = Utilities.sortPriority(shoppingCart);
         sortedCart = Utilities.sortShoppingCart(shoppingCart, priorityList);
 
@@ -100,33 +98,39 @@ public class ShoppingTrip
             if (balance >= sortedCart[i].getPrice())
             {
                 balance -= sortedCart[i].getPrice();
-                purchased[numPurchased] = sortedCart[i];
-                numPurchased++;
-            } else {
-                notPurchased[numNotPurchased] = sortedCart[i];
-                numNotPurchased++;
+                sortedCart[i].setPurchased(true);
             }
         }
         
         // print purchased items
         System.out.println("\nYour starting balance was $59.00");
         System.out.println("You purchased:");
-        for (int i = 0; i < numPurchased; i++)
+        int counter = 1; // counter for display purposes;
+        for (int i = 0; i < NUM_ITEMS; i++)
         {
-            System.out.println((i + 1) + ") " + purchased[i].getName());
-            System.out.print("\t@ ");
-            Utilities.writeMoney(purchased[i].getPrice());
-            System.out.println();
+            if (sortedCart[i].getPurchased())
+            {
+                System.out.println(counter + ") " + sortedCart[i].getName());
+                System.out.print("\t@ ");
+                Utilities.writeMoney(sortedCart[i].getPrice());
+                System.out.println();
+                counter++;
+            }
         }
 
         // print items not purchased
         System.out.println("\nYou did not have enough money for:");
-        for (int i = 0; i < numNotPurchased; i++)
+        counter = 1; // reset counter
+        for (int i = 0; i < NUM_ITEMS; i++)
         {
-            System.out.println((i + 1) + ") " + notPurchased[i].getName());
-            System.out.print("\t@ ");
-            Utilities.writeMoney(notPurchased[i].getPrice());
-            System.out.println();
+            if (!(sortedCart[i].getPurchased()))
+            {
+                System.out.println(counter + ") " + sortedCart[i].getName());
+                System.out.print("\t@ ");
+                Utilities.writeMoney(sortedCart[i].getPrice());
+                System.out.println();
+                counter++;
+            }
         }
 
         // print leftover balance

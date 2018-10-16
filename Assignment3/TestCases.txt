@@ -1,14 +1,57 @@
+TEST CASES
+----------------------------------
 
+>>>> Bad priority
+The priority variable is an integer. The inputChar() method in the Utilities class will parse to make sure the user is
+actually inputing an integer. It will also check for negatives. If the user enters a negative number for priority, they
+will be asked to try again. Here's a sample screen output for entering 'A' for item 1, and '-4' for priority.
+
+'''
+Enter a letter for item 1
+--> A
+You chose Goggles
+
+How badly do you need this item?
+Enter the priority for item #1 as a whole number
+(Lower number indicates higher priority)
+--> -4
+
+ERROR: Must enter a positive whole number.
+Enter the priority for item #1 as a whole number
+(Lower number indicates higher priority)
+-->
+'''
+Because priority is an integer, we are limited by the Java definition of an int. If the user enter's an absurdly large number
+like 3,000,000,000 it will cause an exception. Fortunately, the exception thrown is a NumberFormatException, which is exactly
+what inputChar() is able to catch. It will be processed in the same manner as a negative input. 
+
+'''
+How badly do you need this item?
+Enter the priority for item #1 as a whole number
+(Lower number indicates higher priority)
+--> 3000000000
+
+ERROR: Must enter a positive whole number.
+Enter the priority for item #1 as a whole number
+(Lower number indicates higher priority)
+-->
+'''
+Another thing to note is that the priorities do not have to be numbered 1 through 7. As long as all priorities are >= 0 
+and are unique, the program will still be able to purchase items in the proper order. Because we have a fixed number of items
+(7 in this case), it is not necessary that the priorities don't need to be 1 - 7. They just need to be unique and positive. 
+
+----------------------------------
 >>>> When the money runs out. 
 For this example I entered the items in the order they were initially printed on the menu
 I entered 'A' for item 1, and '1' for priority, then 'B' for item 2 and '2' for priority and so on.
 The helmet is the most expensive item at $34.95 (a bargain by the way, real ski helmets go for a $100+)
-Goggles will be purchased 1st as they had the highest priority. At this point, we're already can't afford
+Goggles will be purchased 1st as they had the highest priority. At this point, we already can't afford
 to buy the helmet so the program will skip over it. However, the purchasing loop does not stop, 
 it will continue to try to purchase other items from the list as long as there is enough money. In this
 case, we did not have enough money for the helmet, so the program continued to the item at priority 3.
 We did have enough money so we bought it, same with the item with priority 4. 
 
+Sample screen output:
 '''
 Your starting balance was $59.00
 You purchased:
@@ -30,4 +73,76 @@ You did not have enough money for:
         @ $10.25
 
 Your remaining balance is $2.04
+'''
+
+----------------------------------
+>>>> Duplicate items
+There are 3 scenarios in which we can have duplicate items. The name is the same, the priority is the same, 
+or BOTH the name and priority are the same. (Because price is hard-coded to correspond with a particular name, we don't
+need to check for price and name, just one of them.) The conditional statement in the checkArray() method has a branch
+to handle each of those scenarios. In either scenario, the user will be prompted to choose another name, priority, or both. 
+The screnshot below shows if just the priority is the same"
+'''
+Enter a letter for item 1
+--> A
+You chose Goggles
+
+How badly do you need this item?
+Enter the priority for item #1 as a whole number
+(Lower number indicates higher priority)
+--> 1
+
+Successfully added Goggles with priority 1 to cart.
+
+Enter a letter for item 2
+--> B
+You chose Helmet
+
+How badly do you need this item?
+Enter the priority for item #2 as a whole number
+(Lower number indicates higher priority)
+--> 1
+
+ERROR: Items #1 and #2
+have the same priority.
+Please change the priority.
+Enter the priority for item #2 as a whole number
+(Lower number indicates higher priority)
+-->
+'''
+
+If both name and priority are the same. The user will have to redo both:
+'''
+Enter a letter for item 1
+--> A
+You chose Goggles
+
+How badly do you need this item?
+Enter the priority for item #1 as a whole number
+(Lower number indicates higher priority)
+--> 1
+
+Successfully added Goggles with priority 1 to cart.
+
+Enter a letter for item 2
+--> A
+You chose Goggles
+
+How badly do you need this item?
+Enter the priority for item #2 as a whole number
+(Lower number indicates higher priority)
+--> 1
+
+ERROR: Items #1 and #2
+have the same name and priority
+Please select a different option for item #2
+Refer to the options menu at the top.
+Enter a letter for a differnt item
+--> B
+Please change the priority
+Enter the priority for item #2 as a whole number
+(Lower number indicates higher priority)
+--> 2
+
+Successfully added Helmet with priority 2 to cart.
 '''

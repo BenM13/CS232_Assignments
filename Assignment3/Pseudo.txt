@@ -1,0 +1,135 @@
+Item Class
+
+private String name;
+private double price;
+private int priority;
+private boolean purchased;
+
+public Item(startingName, startingPrice)
+    name = startingName
+    price = startingPrice
+    priority = 0
+    purchased = false
+    // priority and purchased will start with default values
+
+public boolean equals(differentItem)
+    boolean isEqual = false
+    if both names are equal && both priorities are equal:
+        isEqual = true
+    return isEqual
+
+public boolean checkArray(currentList)
+    for i in currentList:
+        for k + 1 in current list // compare each element to the next element in the list
+            if item[i] == item[k]:
+                set priority/name
+                return true
+            else:
+                return flase
+
+public void setPriority:
+    do:
+        prompt for integer
+    while: inputed integer is invalid
+    priority = inputed integer
+
+public void setName:
+    do
+        prompt for valid letter
+    while: inputed char is invalid
+    switch (input)
+        options for items go here
+    
+public void setPrice(newPrice):
+    price = newPrice
+
+public variableType getVariable():
+    return variable
+
+-----------------------------------------
+Utilities Class
+
+import Scanner;
+import util.Arrays
+
+private static final String PROMPT;
+private static final String REGEX;
+
+public static void quitProgram:
+    System.exit(0)
+
+public static char inputChar():
+    create Scanner object
+    prompt for String
+    try:
+        take character at Input String position 1
+    catch StringInputOutOfBounds exception:
+        print "ERROR"
+        return '!'
+    if input does not match regex:
+        print "ERROR"
+        return '!'
+    return input
+
+public static int inputInt():
+    create Scanner object
+    prompt for String
+    try:
+        convert input to int 
+    catch NumberFormatException:
+        print "ERROR"
+        return 0
+    if input is negative:
+        return 0
+    return input
+
+public int[] sortPriority(current Item list)
+    create new int[] priorityArray
+    for i in currentList:
+        priorityArray[i] = priority of currentList[i]
+    sort priorityArray with Arrays.sort()
+    return priorityArray
+
+-----------------------------------------
+ShoppingTrip Class
+
+declare arrays:
+    Item[] shoppingCart
+    Item[] sortedCart
+    int[] priorityList
+declare other variables:
+    int numItems = 7
+    double balance = 59
+
+main method:
+    print options menu "A: this item", "B: a different item"
+
+    for i in range numItems:
+        do:
+            prompt for char
+        while (char input is invalid)
+        switch (input)
+            instantiate appropriate item for each letter A though J
+        call setPriority using inputInt utility
+        while (checkArray is true) // meaning there was a duplicate
+            checkArray // again! this will prompt for new input
+        print confirmation method
+
+    call sortPriority() to create priorityList
+    call sortShoppingCart(priorityList) to sort Item objects by priority
+
+    for i in range sortedCart
+        if balance >= price of current item:
+            buy it! 
+            balance -= price of that item
+    
+    for i in range numItems:
+        if item was purchased:
+            print it!
+    
+    for i in range numItems: // print items not purchased with a separate for loop
+        if item was not purchased:
+            print it!
+    
+    print remaining balance
+
