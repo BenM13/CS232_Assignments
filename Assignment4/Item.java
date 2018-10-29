@@ -1,9 +1,17 @@
-public class Item
+public class Item implements ForSale
 {
     private String name;
     private double price;
     private int priority;
     private boolean purchased;
+
+    public Item()
+    {
+        name = "n/a";
+        price = 0;
+        priority = 0;
+        purchased = false;
+    }
 
     public Item(String initName, double initPrice)
     /*
@@ -32,7 +40,7 @@ public class Item
         return matches;
     }
 
-    private boolean priorityEquals(Item differentItem)
+    public boolean priorityEquals(Item differentItem)
     /*
     tests whether current item has the same priority as
     the argument item. Returns true/false.
@@ -186,38 +194,6 @@ public class Item
                 Utilities.quitProgram("Invalid item input");
                 break;         
         }
-    }
-
-    public static int[] sortPriority(Item[] currentList)
-    /*
-    Creates an int array of priorities corresponding to the user-inputed prioriteies
-    of the Item objects. Must provide Item list as an argument.
-    Sorts the array in ascending order. Returns the newly created array. 
-    */
-    {
-        int[] itemPriority = new int[currentList.length];
-        for (int i = 0; i < currentList.length; i++)
-        {
-            itemPriority[i] = currentList[i].getPriority();
-        }
-        Arrays.sort(itemPriority);
-        return itemPriority;
-    }
-
-    public static ForSale[] sortShoppingCart(Item[] cart, int[] priorityArray)
-    {
-        ForSale[] sortedItems = new Item[cart.length];
-        int currentPriority;
-        for (int i = 0; i < priorityArray.length; i++)
-        {
-            currentPriority = priorityArray[i];
-            for (int k = 0; k < cart.length; k++) // search for matching priority
-            {
-                if (currentPriority == cart[k].getPriority())
-                    sortedItems[i] = cart[k];
-            }
-        }
-        return sortedItems;
     }
     
     public void setPrice(double newPrice)
