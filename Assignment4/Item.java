@@ -1,4 +1,4 @@
-public class Item implements ForSale
+public abstract class Item implements ForSale
 {
     private String name;
     private double price;

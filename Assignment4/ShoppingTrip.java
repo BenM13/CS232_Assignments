@@ -4,7 +4,7 @@ public class ShoppingTrip
 {
     public static void main(String[] args)
     {
-        final int NUM_ITEMS = 1;
+        final int NUM_ITEMS = 3;
         Item[] shoppingCart = new Item[NUM_ITEMS];
         Item[] sortedCart = new Item[NUM_ITEMS];
         int[] priorityList = new int[NUM_ITEMS];
@@ -81,7 +81,7 @@ public class ShoppingTrip
                     break;
                 case 'J':
                     ShopService locker = new ShopService("Locker rental", 6.89);
-                    shoppingCart[i] = new Item("Locker rental", 6.89);
+                    shoppingCart[i] = locker;
                     break;
                 default:
                     Utilities.quitProgram("Invalid item input");
@@ -99,16 +99,15 @@ public class ShoppingTrip
             System.out.println(" to cart.");
         }
 
-        // create priority array and sort the shopping cart
-        priorityList = Utilities.sortPriority(shoppingCart);
-        sortedCart = Utilities.sortShoppingCart(shoppingCart, priorityList);
+        // sort shopping cart array by priority
+        Utilities.selectionSort(shoppingCart);
 
-        for (int i = 0; i < sortedCart.length; i++)
+        for (int i = 0; i < shoppingCart.length; i++)
         {
-            if (balance >= sortedCart[i].getPrice())
+            if (balance >= shoppingCart[i].getPrice())
             {
-                balance -= sortedCart[i].getPrice();
-                sortedCart[i].setPurchased(true);
+                balance -= shoppingCart[i].getPrice();
+                shoppingCart[i].setPurchased(true);
             }
         }
         
@@ -118,11 +117,11 @@ public class ShoppingTrip
         int counter = 1; // counter for display purposes;
         for (int i = 0; i < NUM_ITEMS; i++)
         {
-            if (sortedCart[i].getPurchased())
+            if (shoppingCart[i].getPurchased())
             {
-                System.out.println(counter + ") " + sortedCart[i].getName());
+                System.out.println(counter + ") " + shoppingCart[i].getName());
                 System.out.print("\t@ ");
-                Utilities.writeMoney(sortedCart[i].getPrice());
+                Utilities.writeMoney(shoppingCart[i].getPrice());
                 System.out.println();
                 counter++;
             }
@@ -133,11 +132,11 @@ public class ShoppingTrip
         counter = 1; // reset counter
         for (int i = 0; i < NUM_ITEMS; i++)
         {
-            if (!(sortedCart[i].getPurchased()))
+            if (!(shoppingCart[i].getPurchased()))
             {
-                System.out.println(counter + ") " + sortedCart[i].getName());
+                System.out.println(counter + ") " + shoppingCart[i].getName());
                 System.out.print("\t@ ");
-                Utilities.writeMoney(sortedCart[i].getPrice());
+                Utilities.writeMoney(shoppingCart[i].getPrice());
                 System.out.println();
                 counter++;
             }

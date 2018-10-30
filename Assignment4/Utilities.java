@@ -80,37 +80,46 @@ public class Utilities
             System.out.println("ERROR: Must enter a positive whole number.");
         return newInt;
     }
-
-    public static int[] sortPriority(Item[] currentList)
-    /*
-    Creates an int array of priorities corresponding to the user-inputed prioriteies
-    of the Item objects. Must provide Item list as an argument.
-    Sorts the array in ascending order. Returns the newly created array. 
+    
+    public static void selectionSort(Item[] cart)
+    /**
+    Sorts the array into ascending order.
+    Every element in cart must have a value
     */
     {
-        int[] itemPriority = new int[currentList.length];
-        for (int i = 0; i < currentList.length; i++)
-        {
-            itemPriority[i] = currentList[i].getPriority();
+        for (int i = 0; i < cart.length - 1; i++)
+        {        
+            // place the correct value in cart[index]
+            int indexOfNextSmallest = findLowestPriority(i, cart);
+            interchange(i, indexOfNextSmallest, cart);
         }
-        Arrays.sort(itemPriority);
-        return itemPriority;
     }
 
-    public static Item[] sortShoppingCart(Item[] cart, int[] priorityArray)
+    private static int findLowestPriority(int startIndex, Item[] cart)
+    /**
+    Returns the index of the item with the lowest priority.
+    Starts searching from the index provided with startIndex.
+    Stops at last element.
+    */
     {
-        Item[] sortedItems = new Item[cart.length];
-        int currentPriority;
-        for (int i = 0; i < priorityArray.length; i++)
+        int min = cart[startIndex].getPriority();
+        int indexOfMin = startIndex;
+        for (int i = startIndex + 1; i < cart.length; i++)
         {
-            currentPriority = priorityArray[i];
-            for (int k = 0; k < cart.length; k++) // search for matching priority
+            if (cart[i].getPriority() < min)
             {
-                if (currentPriority == cart[k].getPriority())
-                    sortedItems[i] = cart[k];
+                min = cart[i].getPriority();
+                indexOfMin = i;
             }
         }
-        return sortedItems;
+        return indexOfMin;
+    }
+
+    private static void interchange(int i, int j, Item[] cart)
+    {
+        Item temporary = cart[i];
+        cart[i] = cart[j];
+        cart[j] = temporary; //original value of cart[i]
     }
 
     private static void writePositive(double amount)
