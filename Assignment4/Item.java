@@ -26,49 +26,12 @@ public abstract class Item implements ForSale
         purchased = false; // default
     }
 
-    public boolean nameEquals(Item differentItem)
-    /*
-    Test whether current item has the same name
-    as the argument item. Returns true/false.
-    */
-    {
-        boolean matches;
-        if (name.equals(differentItem.name))
-            matches = true;
-        else
-            matches = false;
-        return matches;
-    }
-
-    public boolean priorityEquals(Item differentItem)
-    /*
-    tests whether current item has the same priority as
-    the argument item. Returns true/false.
-    */
-    {
-        boolean matches;
-        if (priority == differentItem.priority)
-            matches = true;
-        else
-            matches = false;
-        return matches;
-    }
-
-    public boolean isDuplicate(Item differentItem)
-    /*
-    Test whether current item is identical to the argument item.
-    For our purposes, two items are considered identical if both their
-    name AND their prirority are the same. Returns true/flase.
-    */
-    {
-        boolean matches;
-        if ((name.equals(differentItem.name) && (priority == differentItem.priority)))
-            matches = true;
-        else
-            matches = false;
-        return matches;
-    }
-
+    public abstract boolean nameEquals(Item differentItem);
+    
+    public abstract boolean priorityEquals(Item differentItem);
+    
+    public abstract boolean isDuplicate(Item differentItem);
+    
     public boolean checkArray(Item[] currentList, int currentLength)
     /*
     Loops through the list of Items that have been created so far.

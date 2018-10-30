@@ -1,4 +1,4 @@
-CLASS: Item
+tCLASS: Item
     - Attributes:
         -- int priority
         -- double price
@@ -10,7 +10,7 @@ CLASS: Item
         -- setPrice
         -- setPurchased // change the status of purchased
         -- equals, //check for duplicates for both name and priority
-        -- get methods for each attribute 
+        -- get methods for each attribue 
 
 CLASS: Utilities
     - Attributes:
