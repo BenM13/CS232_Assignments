@@ -1,11 +1,13 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class ShoppingTrip
 {
     public static void main(String[] args)
     {
-        final int NUM_ITEMS = 7;
-        Item[] shoppingCart = new Item[NUM_ITEMS];
+        final int NUM_ITEMS = 3; // Change to 7 before final submission!!
+        // Item[] shoppingCart = new Item[NUM_ITEMS];
+        ArrayList<Item> shoppingCart = new ArrayList<>(NUM_ITEMS);
         double balance = 59; // start with $59.00 to spend
 
         System.out.println("Welcome to the Mountain-side Ski Shop!");
@@ -43,69 +45,81 @@ public class ShoppingTrip
             switch (choice) {
                 case 'A':
                     Gear goggles = new Gear("Used Goggles", 24.99, true);
-                    shoppingCart[i] = goggles;
+                    // shoppingCart[i] = goggles;
+                    shoppingCart.add(i, goggles);
                     break;
                 case 'B':
                     Gear helmet = new Gear("Used Helmet", 34.95, true);
-                    shoppingCart[i] = helmet;
+                    // shoppingCart[i] = helmet;
+                    shoppingCart.add(i, helmet);
                     break;
                 case 'C':
                     Gear mask = new Gear("FaceMask", 11.99, false);
-                    shoppingCart[i] = mask;
+                    // shoppingCart[i] = mask;
+                    shoppingCart.add(i, mask);
                     break;
                 case 'D':
                     Gear gloves = new Gear("Gloves", 19.98, false);
-                    shoppingCart[i] = gloves;
+                    // shoppingCart[i] = gloves;
+                    shoppingCart.add(i, gloves);
                     break;
                 case 'E':
                     Gear handWarmers = new Gear("Hand warmers", 4.99, false);
-                    shoppingCart[i] = handWarmers;
+                    // shoppingCart[i] = handWarmers;
+                    shoppingCart.add(i, handWarmers);
                     break;
                 case 'F':
                     Gear toeWarmers = new Gear("Toe warmers", 4.99, false);
-                    shoppingCart[i] = toeWarmers;
+                    // shoppingCart[i] = toeWarmers;
+                    shoppingCart.add(i, toeWarmers);
                     break;
                 case 'G':
                     ShopService adjustment = new ShopService("Binding adjustment", 10.25, 3);
-                    shoppingCart[i] = adjustment;
+                    // shoppingCart[i] = adjustment;
+                    shoppingCart.add(i, adjustment);
                     break;
                 case 'H':
                     ShopService sharpening = new ShopService("Edge sharpening", 14.97, 2);
-                    shoppingCart[i] = sharpening;
+                    // shoppingCart[i] = sharpening;
+                    shoppingCart.add(i, sharpening);
                     break;
                 case 'I':
                     ShopService wax = new ShopService("Ski waxing", 10.99, 1);
-                    shoppingCart[i] = wax;
+                    // shoppingCart[i] = wax;
+                    shoppingCart.add(i, wax);
                     break;
                 case 'J':
                     ShopService locker = new ShopService("Locker rental", 6.89, 1);
-                    shoppingCart[i] = locker;
+                    // shoppingCart[i] = locker;
+                    shoppingCart.add(i, locker);
                     break;
                 default:
                     Utilities.quitProgram("Invalid item input");
                     break;         
                 }
-            System.out.println("You chose " + shoppingCart[i].getName());
+            System.out.println("You chose " + shoppingCart.get(i).getName());
             System.out.println("\nHow badly do you need this item?");
-            shoppingCart[i].setPriority(i + 1);
-            while (shoppingCart[i].checkArray(shoppingCart, (i + 1))); 
+            shoppingCart.get(i).setPriority(i + 1);
+            while (shoppingCart.get(i).checkArray(shoppingCart, (i + 1))); 
             {
-                shoppingCart[i].checkArray(shoppingCart, (i + 1));
+                shoppingCart.get(i).checkArray(shoppingCart, (i + 1));
             }
-            System.out.print("Successfully added " + shoppingCart[i].getName() +
-                               " with priority " + shoppingCart[i].getPriority());
+            System.out.print("Successfully added " + shoppingCart.get(i).getName() +
+                               " with priority " + shoppingCart.get(i).getPriority());
             System.out.println(" to cart.");
         }
 
         // sort shopping cart array by priority
         Utilities.selectionSort(shoppingCart);
 
-        for (int i = 0; i < shoppingCart.length; i++)
+        for (int i = 0; i < shoppingCart.size(); i++)
         {
-            if (balance >= shoppingCart[i].getPrice())
+            // if (balance >= shoppingCart[i].getPrice())
+            if (balance >= shoppingCart.get(i).getPrice())
             {
-                balance -= shoppingCart[i].getPrice();
-                shoppingCart[i].setPurchased(true);
+                balance -= shoppingCart.get(i).getPrice();
+                // shoppingCart[i].setPurchased(true);
+                shoppingCart.get(i).setPurchased(true);
             }
         }
         
@@ -115,11 +129,11 @@ public class ShoppingTrip
         int counter = 1; // counter for display purposes;
         for (int i = 0; i < NUM_ITEMS; i++)
         {
-            if (shoppingCart[i].getPurchased())
+            if (shoppingCart.get(i).getPurchased())
             {
-                System.out.println(counter + ") " + shoppingCart[i].getName());
+                System.out.println(counter + ") " + shoppingCart.get(i).getName());
                 System.out.print("\t@ ");
-                Utilities.writeMoney(shoppingCart[i].getPrice());
+                Utilities.writeMoney(shoppingCart.get(i).getPrice());
                 System.out.println();
                 counter++;
             }
@@ -130,11 +144,11 @@ public class ShoppingTrip
         counter = 1; // reset counter
         for (int i = 0; i < NUM_ITEMS; i++)
         {
-            if (!(shoppingCart[i].getPurchased()))
+            if (!(shoppingCart.get(i).getPurchased()))
             {
-                System.out.println(counter + ") " + shoppingCart[i].getName());
+                System.out.println(counter + ") " + shoppingCart.get(i).getName());
                 System.out.print("\t@ ");
-                Utilities.writeMoney(shoppingCart[i].getPrice());
+                Utilities.writeMoney(shoppingCart.get(i).getPrice());
                 System.out.println();
                 counter++;
             }
