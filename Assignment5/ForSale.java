@@ -19,7 +19,7 @@ public interface ForSale
     name AND their prirority are the same. Returns true/flase.
     */
 
-    // public boolean checkArray(ArrayList<Item> currentList, int currentLength);
+    // public boolean checkArray(Item[] currentList, int currentLength);
     /*
     Loops through the list of Items that have been created so far.
     Checks for duplicates. If item i and item k have the same name or priority,

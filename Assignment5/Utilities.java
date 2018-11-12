@@ -103,15 +103,12 @@ public class Utilities
     Stops at last element.
     */
     {
-        // int min = cart[startIndex].getPriority();
         int min = cart.get(startIndex).getPriority();
         int indexOfMin = startIndex;
         for (int i = startIndex + 1; i < cart.size(); i++)
         {
-            // if (cart[i].getPriority() < min)
             if (cart.get(i).getPriority() < min)
             {
-                // min = cart[i].getPriority();
                 min = cart.get(i).getPriority();
                 indexOfMin = i;
             }
@@ -121,11 +118,10 @@ public class Utilities
 
     private static void interchange(int i, int j, ArrayList<Item> cart)
     {
-        //Item temporary = cart[i];
         Item temporary = cart.get(i);
         // cart[i] = cart[j];
         cart.set(i, cart.get(j));
-       //  cart[j] = temporary; //original value of cart[i]
+        // cart[j] = temporary; //original value of cart[i]
         cart.set(j, temporary);
     }
 

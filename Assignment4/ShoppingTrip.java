@@ -6,6 +6,8 @@ public class ShoppingTrip
     {
         final int NUM_ITEMS = 7;
         Item[] shoppingCart = new Item[NUM_ITEMS];
+        Item[] sortedCart = new Item[NUM_ITEMS];
+        int[] priorityList = new int[NUM_ITEMS];
         double balance = 59; // start with $59.00 to spend
 
         System.out.println("Welcome to the Mountain-side Ski Shop!");
