@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.regex.Pattern;
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.lang.NumberFormatException;
 import java.lang.StringIndexOutOfBoundsException;
