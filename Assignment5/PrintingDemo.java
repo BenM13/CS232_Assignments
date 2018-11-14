@@ -9,5 +9,8 @@ public class PrintingDemo
         io.printSingle(1);
         io.printLine();
         io.printSingle(1.1);
+        int random = 5;
+        // io.printLine(random);
+        io.printLine("this is a " + random + " a line of text.");
     }
 }

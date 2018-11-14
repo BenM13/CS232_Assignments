@@ -9,14 +9,15 @@ public class Utilities
     private static int newInt; // for use with inputInt()
     private static char newChar; // for use with inputChar()
     private static final String PROMPT = "--> ";
-    private static final String REGEX = "[A-J]"; // pattern for regular expression. 
+    private static final String REGEX = "[A-J]"; // pattern for regular expression.
+    private static IO_Manager io = new IO_Manager(); 
 
     public static void quitProgram()
     /*
     Safely exits the program without an error message
     */
     {
-        System.out.println("Now exiting...goodbye!");
+        io.printLine("Now exiting...goodbye!");
         System.exit(0);
     }
 
@@ -26,8 +27,8 @@ public class Utilities
     Must pass a message as a string when calling this method.
     */
     {
-        System.out.println("ERROR: " + message);
-        System.out.println("Now exiting...please restart and try again.");
+        io.printLine("ERROR: " + message);
+        io.printLine("Now exiting...please restart and try again.");
         System.exit(0);
     }
 
@@ -41,18 +42,18 @@ public class Utilities
     */
     {
         Scanner keyboard = new Scanner(System.in);
-        System.out.print(PROMPT);
+        io.printSingle(PROMPT);
         String inputString = keyboard.nextLine().toUpperCase();
         try
         {
             newChar = inputString.charAt(0);
         } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("ERROR: Invalid input.");
+            io.printLine("ERROR: Invalid input.");
             return '!';
         }
         if (!(Pattern.matches(REGEX, inputString.substring(0, 1))))
         {
-            System.out.println("ERROR: Must enter a letter A through J.");
+            io.printLine("ERROR: Must enter a letter A through J.");
             newChar = '!';
         }
         return newChar;
@@ -65,19 +66,19 @@ public class Utilities
     be converted. Otherwise, returns the input as an int. 
     */
     {
-        System.out.print(PROMPT);
+        io.printSingle(PROMPT);
         Scanner keyboard = new Scanner(System.in);
         String inputString = keyboard.nextLine();
-        System.out.println();
+        io.printLine();
         try
         {
             newInt = Integer.parseInt(inputString);
         } catch (NumberFormatException e) {
-            System.out.println("ERROR: Must enter a positive whole number.");
+           io.printLine("ERROR: Must enter a positive whole number.");
             return 0;
         }
         if (newInt <= 0) // priority can't be negative
-            System.out.println("ERROR: Must enter a positive whole number.");
+            io.printLine("ERROR: Must enter a positive whole number.");
         return newInt;
     }
     

@@ -43,28 +43,29 @@ public abstract class Item implements ForSale
     Returns true if there were duplicate items, returns false otherwise. 
     */
     {
+        IO_Manager io = new IO_Manager();
         boolean hasDuplicates = false; // assume no duplicates at first
         for (int i = 0; i < currentLength; i++)
         {
             for (int k = i + 1; k < currentLength; k++)
             {
                 if (currentList.get(i).isDuplicate(currentList.get(k))) {
-                    System.out.println("ERROR: Items #" + (i + 1) + " and #" + (k + 1));
-                    System.out.println("have the same name and priority");
+                    io.printLine("ERROR: Items #" + (i + 1) + " and #" + (k + 1));
+                    io.printLine("have the same name and priority");
                     currentList.get(k).setName(k + 1);
-                    System.out.println("Please change the priority");
+                    io.printLine("Please change the priority");
                     currentList.get(k).setPriority(k + 1);
                     hasDuplicates = true;
                 }
                 else if (currentList.get(i).nameEquals(currentList.get(k))) {
-                    System.out.println("ERROR: Items #" + (i + 1) + " and #" + (k + 1));
-                    System.out.println("have the same name.");
+                    io.printLine("ERROR: Items #" + (i + 1) + " and #" + (k + 1));
+                    io.printLine("have the same name.");
                     currentList.get(k).setName(k + 1);
                     hasDuplicates = true;
                 } else if (currentList.get(i).priorityEquals(currentList.get(k))) {
-                    System.out.println("ERROR: Items #" + (i + 1) + " and #" + (k + 1));
-                    System.out.println("have the same priority.");
-                    System.out.println("Please change the priority.");
+                    io.printLine("ERROR: Items #" + (i + 1) + " and #" + (k + 1));
+                    io.printLine("have the same priority.");
+                    io.printLine("Please change the priority.");
                     currentList.get(k).setPriority(k + 1);
                     hasDuplicates = true;
                 }
@@ -81,12 +82,13 @@ public abstract class Item implements ForSale
     Updates the value of priority. 
     */
     {
+        IO_Manager io = new IO_Manager();
         int priorityInput;
         do // repeats prompt until user enters a valid int
         {
-            System.out.println("Enter the priority for item #" + itemNumber +
+            io.printLine("Enter the priority for item #" + itemNumber +
                             " as a whole number");
-            System.out.println("(Lower number indicates higher priority)");
+            io.printLine("(Lower number indicates higher priority)");
             priorityInput = Utilities.inputInt();
         // Utilities.inputInt() returns 0 if there is a problem with the input
         } while (priorityInput <= 0);
@@ -104,13 +106,14 @@ public abstract class Item implements ForSale
     better having come from Python, ok?
     */
     {
-        System.out.println("Please select a different option " +
+        IO_Manager io = new IO_Manager();
+        io.printLine("Please select a different option " +
                            "for item #" + itemNumber);
-        System.out.println("Refer to the options menu at the top.");
+        io.printLine("Refer to the options menu at the top.");
         char choice;
         do // repeat prompt until user enters valid char
         {
-            System.out.println("Enter a letter for a differnt item");
+            io.printLine("Enter a letter for a differnt item");
             choice = Utilities.inputChar();
             // inputchar() returns '!' if there is a problem with the input
         } while (choice == '!');
