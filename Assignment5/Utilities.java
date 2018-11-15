@@ -44,33 +44,6 @@ public class Utilities
         }
     }
 
-    public static char inputChar()
-    /*
-    Prompts user for a letter, takes input as a string
-    Converts string to all uppercase. Tries to take character at
-    position 0. If the index is out of bound (i.e. user types in nothing
-    and hits ENTER anyways) returns an exclamation mark '!' char.
-    Checks if char is in range A through J. Returns '!' char if not in range.
-    */
-    {
-        Scanner keyboard = new Scanner(System.in);
-        io.printSingle(PROMPT);
-        String inputString = keyboard.nextLine().toUpperCase();
-        try
-        {
-            newChar = inputString.charAt(0);
-        } catch (StringIndexOutOfBoundsException e) {
-            io.printLine("ERROR: Invalid input.");
-            return '!';
-        }
-        if (!(Pattern.matches(REGEX, inputString.substring(0, 1))))
-        {
-            io.printLine("ERROR: Must enter a letter A through J.");
-            newChar = '!';
-        }
-        return newChar;
-    }
-
     public static int inputInt()
     /*
     Prompts user for an integer. Takes input as a string.
@@ -131,9 +104,7 @@ public class Utilities
     private static void interchange(int i, int j, ArrayList<Item> cart)
     {
         Item temporary = cart.get(i);
-        // cart[i] = cart[j];
         cart.set(i, cart.get(j));
-        // cart[j] = temporary; //original value of cart[i]
         cart.set(j, temporary);
     }
 

@@ -7,10 +7,26 @@ public class ShoppingTrip
     {
         final int NUM_ITEMS = 3; // Change to 7 before final submission!!
         ArrayList<Item> shoppingCart = new ArrayList<>(NUM_ITEMS);
-        double balance = 59; // start with $59.00 to spend
+        // double balance = 59; // start with $59.00 to spend
         IO_Manager io = new IO_Manager();
-
+        String name;
+        double budget;    
+    
         io.printLine("Welcome to the Mountain-side Ski Shop!");
+        io.printLine("Please enter your name without spaces or special characters");
+        do 
+        {
+            name = io.inputName();
+        } while (name.equalsIgnoreCase("!"));
+
+        io.printLine("How much money would you like to spend today?");
+        io.printLine("Enter a positive whole number greater than 0.");
+        do
+        {
+            budget = (double)io.inputInt();
+        } while (budget <= 0);
+        double balance = budget;
+
         io.printLine("Check out our products/shop services listed below:");
         io.printLine("To exit, type \"--exit\" into the console");
         io.printLine("-----------------------");
@@ -115,7 +131,10 @@ public class ShoppingTrip
         }
         
         // print purchased items
-        io.printLine("\nYour starting balance was $59.00");
+        io.printLine("\nOkay " + name + ", it's time to checkout.");
+        io.printSingle("Your starting balance was ");
+        Utilities.writeMoney(budget);
+        io.printLine();
         io.printLine("You purchased:");
         int counter = 1; // counter for display purposes;
         for (int i = 0; i < NUM_ITEMS; i++)

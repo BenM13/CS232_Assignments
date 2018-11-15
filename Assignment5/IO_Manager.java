@@ -3,6 +3,10 @@ import java.util.regex.Pattern;
 import java.lang.NumberFormatException;
 import java.lang.StringIndexOutOfBoundsException;
 
+/**
+Class to manage all user input and
+all output to the console
+*/
 public class IO_Manager implements Printable
 {
     private char newChar;
@@ -90,6 +94,54 @@ public class IO_Manager implements Printable
         } catch (BadInputException e) {
             printLine(e.getMessage());
             return '!';
+        }
+    }
+
+    public int inputInt()
+    /*
+    Prompts user for an integer. Takes input as a string.
+    Tries to convert string to an int. Returns 0 if string can't
+    be converted. Otherwise, returns the input as an int. 
+    */
+    {
+        printSingle(PROMPT);
+        Scanner keyboard = new Scanner(System.in);
+        String inputString = keyboard.nextLine();
+        Utilities.checkForExit(inputString);
+        printLine();
+        try
+        {
+            newInt = Integer.parseInt(inputString);
+            if (newInt <= 0)
+            {
+                throw new BadInputException("ERROR: Must enter a positive whole number");
+            }
+            return newInt;
+        } catch (NumberFormatException e) {
+            printLine("ERROR: Input must be a whole number.");
+            return 0;
+        } catch (BadInputException e) {
+            printLine(e.getMessage());
+            return 0;
+        }
+    }
+
+    public String inputName()
+    {
+        printSingle(PROMPT);
+        Scanner keyboard = new Scanner(System.in);
+        String inputString = keyboard.nextLine();
+        Utilities.checkForExit(inputString);
+        try
+        {
+            if (!Pattern.matches(REGEX_NAME, inputString))
+            {
+                throw new BadInputException("ERROR: No spaces or special characters");
+            }
+            return inputString;
+        } catch (BadInputException e) {
+            printLine(e.getMessage());
+            return "!";
         }
     }
 }
