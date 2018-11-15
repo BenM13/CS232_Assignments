@@ -32,6 +32,18 @@ public class Utilities
         System.exit(0);
     }
 
+    public static void checkForExit(String input)
+    /**
+    Checks for the exit conition "--exit".
+    Quits program if input matches conidition
+    */
+    {
+        if (input.equalsIgnoreCase("--exit"))
+        {
+            quitProgram();
+        }
+    }
+
     public static char inputChar()
     /*
     Prompts user for a letter, takes input as a string

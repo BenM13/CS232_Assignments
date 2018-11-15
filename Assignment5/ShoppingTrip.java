@@ -12,6 +12,7 @@ public class ShoppingTrip
 
         io.printLine("Welcome to the Mountain-side Ski Shop!");
         io.printLine("Check out our products/shop services listed below:");
+        io.printLine("To exit, type \"--exit\" into the console");
         io.printLine("-----------------------");
         io.printLine("A) Used Ski Goggles: $24.99");
         io.printLine("B) Used Ski helmet: $34.95");
@@ -39,7 +40,7 @@ public class ShoppingTrip
             do // repeat prompt until user enters valid char
             {
                 io.printLine("\nEnter a letter for item " + (i + 1));
-                choice = Utilities.inputChar();
+                choice = io.inputChar();
             // inputChar() returns '!' if there is a problem with the input
             } while (choice == '!');
             switch (choice) {

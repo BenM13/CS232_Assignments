@@ -114,7 +114,7 @@ public abstract class Item implements ForSale
         do // repeat prompt until user enters valid char
         {
             io.printLine("Enter a letter for a differnt item");
-            choice = Utilities.inputChar();
+            choice = io.inputChar();
             // inputchar() returns '!' if there is a problem with the input
         } while (choice == '!');
         switch (choice) {
