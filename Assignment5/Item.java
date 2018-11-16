@@ -6,6 +6,7 @@ public abstract class Item implements ForSale
     private double price;
     private int priority;
     private boolean purchased;
+    private int quantity;
 
     public Item()
     {
@@ -49,24 +50,11 @@ public abstract class Item implements ForSale
         {
             for (int k = i + 1; k < currentLength; k++)
             {
-                if (currentList.get(i).isDuplicate(currentList.get(k))) {
-                    io.printLine("ERROR: Items #" + (i + 1) + " and #" + (k + 1));
-                    io.printLine("have the same name and priority");
-                    currentList.get(k).setName(k + 1);
-                    io.printLine("Please change the priority");
-                    currentList.get(k).setPriority(k + 1);
-                    hasDuplicates = true;
-                }
-                else if (currentList.get(i).nameEquals(currentList.get(k))) {
+                if (currentList.get(i).nameEquals(currentList.get(k))) 
+                {
                     io.printLine("ERROR: Items #" + (i + 1) + " and #" + (k + 1));
                     io.printLine("have the same name.");
                     currentList.get(k).setName(k + 1);
-                    hasDuplicates = true;
-                } else if (currentList.get(i).priorityEquals(currentList.get(k))) {
-                    io.printLine("ERROR: Items #" + (i + 1) + " and #" + (k + 1));
-                    io.printLine("have the same priority.");
-                    io.printLine("Please change the priority.");
-                    currentList.get(k).setPriority(k + 1);
                     hasDuplicates = true;
                 }
             }

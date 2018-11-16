@@ -5,7 +5,7 @@ public class ShoppingTrip
 {
     public static void main(String[] args)
     {
-        final int NUM_ITEMS = 3; // Change to 7 before final submission!!
+        final int NUM_ITEMS = 5; // Change to 7 before final submission!!
         ArrayList<Item> shoppingCart = new ArrayList<>(NUM_ITEMS);
         // double balance = 59; // start with $59.00 to spend
         IO_Manager io = new IO_Manager();
@@ -13,7 +13,8 @@ public class ShoppingTrip
         double budget;    
     
         io.printLine("Welcome to the Mountain-side Ski Shop!");
-        io.printLine("Please enter your name without spaces or special characters");
+        io.printLine("Type your first name without spaces or special characters");
+        io.printLine("To exit, type \"--exit\" into the console");
         do 
         {
             name = io.inputName();
@@ -28,7 +29,6 @@ public class ShoppingTrip
         double balance = budget;
 
         io.printLine("Check out our products/shop services listed below:");
-        io.printLine("To exit, type \"--exit\" into the console");
         io.printLine("-----------------------");
         io.printLine("A) Used Ski Goggles: $24.99");
         io.printLine("B) Used Ski helmet: $34.95");

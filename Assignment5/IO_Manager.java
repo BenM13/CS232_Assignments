@@ -127,6 +127,12 @@ public class IO_Manager implements Printable
     }
 
     public String inputName()
+    /**
+    Prompts user for first name. Takes input as string.
+    First checks for exit condition. Tries to match input with
+    regex patter (no specials allowed). Throws BadInputException
+    if pattern does not match. Returns the string. 
+    */
     {
         printSingle(PROMPT);
         Scanner keyboard = new Scanner(System.in);
