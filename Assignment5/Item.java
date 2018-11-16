@@ -5,14 +5,17 @@ public abstract class Item implements ForSale
     private String name;
     private double price;
     private int priority;
-    private boolean purchased;
     private int quantity;
+    private int numBought;
+    private boolean purchased;
 
     public Item()
     {
         name = "n/a";
         price = 0;
         priority = 0;
+        quantity = 0;
+        numBought = 0;
         purchased = false;
     }
 
@@ -26,6 +29,8 @@ public abstract class Item implements ForSale
         name = initName;
         price = initPrice;
         priority = 0; // default. Will be changed later
+        quantity = 0;
+        numBought = 0;
         purchased = false; // default
     }
 
@@ -83,8 +88,21 @@ public abstract class Item implements ForSale
         priority = priorityInput;
     }
 
+    public void setQuantity(int itemNumber)
+    {
+        IO_Manager io = new IO_Manager();
+        int quantityInput;
+        do // repeats prompt until user enters a valid int
+        {
+            io.printSingle("Enter a quantity greater than 0 ");
+            io.printLine("for item # " + itemNumber);
+            quantityInput = io.inputInt();
+        } while (quantityInput <= 0);
+        quantity = quantityInput;
+    }
+
     public void setName(int itemNumber)
-    /*
+    /**
     Prompts user to choose a different item.
     This method is called if checkArray detects a duplicate.
     Uses a similar switch statement as seen in main. However, 
@@ -168,6 +186,11 @@ public abstract class Item implements ForSale
         purchased = bought;
     }
 
+    public void setNumBought(int numPurchased)
+    {
+        numBought = numPurchased;
+    }
+
     // All access methods listed below
     public String getName()
     {
@@ -187,5 +210,15 @@ public abstract class Item implements ForSale
     public boolean getPurchased()
     {
         return purchased;
+    }
+
+    public int getQuantity()
+    {
+        return quantity;
+    }
+
+    public int getNumBought()
+    {
+        return numBought;
     }
 }

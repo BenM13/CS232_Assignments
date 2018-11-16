@@ -105,6 +105,8 @@ public class ShoppingTrip
                     break;         
                 }
             io.printLine("You chose " + shoppingCart.get(i).getName());
+            io.printLine("\nHow many would like to purchase?");
+            shoppingCart.get(i).setQuantity(i + 1);
             io.printLine("\nHow badly do you need this item?");
             shoppingCart.get(i).setPriority(i + 1);
             while (shoppingCart.get(i).checkArray(shoppingCart, (i + 1))); 
@@ -120,12 +122,11 @@ public class ShoppingTrip
         Utilities.selectionSort(shoppingCart);
 
         for (int i = 0; i < shoppingCart.size(); i++)
+        // loop through items and buy them!
         {
-            // if (balance >= shoppingCart[i].getPrice())
-            if (balance >= shoppingCart.get(i).getPrice())
+            if (balance >= shoppingCart.get(i).getPrice() * shoppingCart.get(i).getQuantity())
             {
-                balance -= shoppingCart.get(i).getPrice();
-                // shoppingCart[i].setPurchased(true);
+                balance -= (shoppingCart.get(i).getPrice() * shoppingCart.get(i).getQuantity());
                 shoppingCart.get(i).setPurchased(true);
             }
         }
@@ -142,8 +143,9 @@ public class ShoppingTrip
             if (shoppingCart.get(i).getPurchased())
             {
                 io.printLine(counter + ") " + shoppingCart.get(i).getName());
-                io.printSingle("\t@ ");
-                Utilities.writeMoney(shoppingCart.get(i).getPrice());
+                io.printSingle("\t" + shoppingCart.get(i).getQuantity() + "@ ");
+                Utilities.writeMoney(shoppingCart.get(i).getPrice() * 
+                                     shoppingCart.get(i).getQuantity());
                 io.printLine();
                 counter++;
             }
