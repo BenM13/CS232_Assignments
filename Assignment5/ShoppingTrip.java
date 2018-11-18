@@ -1,13 +1,11 @@
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class ShoppingTrip
 {
     public static void main(String[] args)
     {
-        final int NUM_ITEMS = 5; // Change to 7 before final submission!!
+        final int NUM_ITEMS = 3; // Change to 7 before final submission!!
         ArrayList<Item> shoppingCart = new ArrayList<>(NUM_ITEMS);
-        // double balance = 59; // start with $59.00 to spend
         IO_Manager io = new IO_Manager();
         String name;
         double budget;    
@@ -17,7 +15,8 @@ public class ShoppingTrip
         io.printLine("To exit, type \"--exit\" into the console");
         do 
         {
-            name = io.inputName();
+            name = io.inputName();   
+        // io.inputName returns "!" if there's a problem with the input
         } while (name.equalsIgnoreCase("!"));
 
         io.printLine("How much money would you like to spend today?");
@@ -109,7 +108,7 @@ public class ShoppingTrip
             shoppingCart.get(i).setQuantity(i + 1);
             io.printLine("\nHow badly do you need this item?");
             shoppingCart.get(i).setPriority(i + 1);
-            while (shoppingCart.get(i).checkArray(shoppingCart, (i + 1))); 
+            while (shoppingCart.get(i).checkArray(shoppingCart, (i + 1))) 
             {
                 shoppingCart.get(i).checkArray(shoppingCart, (i + 1));
             }
@@ -124,10 +123,13 @@ public class ShoppingTrip
         for (int i = 0; i < shoppingCart.size(); i++)
         // loop through items and buy them!
         {
-            if (balance >= shoppingCart.get(i).getPrice() * shoppingCart.get(i).getQuantity())
+            Item currentItem = shoppingCart.get(i);
+            int currentQuantity = currentItem.getQuantity();
+            if (balance >= (currentItem.getPrice() * currentQuantity))
             {
-                balance -= (shoppingCart.get(i).getPrice() * shoppingCart.get(i).getQuantity());
-                shoppingCart.get(i).setPurchased(true);
+                balance -= (currentItem.getPrice() * currentQuantity);
+                currentItem.setPurchased(true);
+                currentItem.setNumBought(currentQuantity);
             }
         }
         
@@ -140,12 +142,12 @@ public class ShoppingTrip
         int counter = 1; // counter for display purposes;
         for (int i = 0; i < NUM_ITEMS; i++)
         {
-            if (shoppingCart.get(i).getPurchased())
+            Item currentItem = shoppingCart.get(i);
+            if (currentItem.getPurchased())
             {
-                io.printLine(counter + ") " + shoppingCart.get(i).getName());
-                io.printSingle("\t" + shoppingCart.get(i).getQuantity() + "@ ");
-                Utilities.writeMoney(shoppingCart.get(i).getPrice() * 
-                                     shoppingCart.get(i).getQuantity());
+                io.printLine(counter + ") " + currentItem.getName());
+                io.printSingle("\t" + currentItem.getQuantity() + " @ ");
+                Utilities.writeMoney(currentItem.getPrice());
                 io.printLine();
                 counter++;
             }
@@ -156,11 +158,12 @@ public class ShoppingTrip
         counter = 1; // reset counter
         for (int i = 0; i < NUM_ITEMS; i++)
         {
-            if (!(shoppingCart.get(i).getPurchased()))
+            Item currentItem = shoppingCart.get(i);
+            if (!currentItem.getPurchased())
             {
-                io.printLine(counter + ") " + shoppingCart.get(i).getName());
-                io.printSingle("\t@ ");
-                Utilities.writeMoney(shoppingCart.get(i).getPrice());
+                io.printLine(counter + ") " + currentItem.getName());
+                io.printSingle("\t" + currentItem.getQuantity() + " @ ");
+                Utilities.writeMoney(currentItem.getPrice());
                 io.printLine();
                 counter++;
             }
