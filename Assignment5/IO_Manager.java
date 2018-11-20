@@ -154,7 +154,13 @@ public class IO_Manager implements Printable
         }
     }
 
-    public void writePurchased(ArrayList<Item> cart, double money)
+    public void writeReceipt(ArrayList<Item> cart, double startBlanace, double endBalance)
+    /**
+    Opens a text file in the current directory
+    Loops throgh list of items, prints items purchased
+    then items not purchased along with their price
+    to the output file.
+    */
     {
         String filename = "receipt.txt";
         PrintWriter outputStream = null;
@@ -167,7 +173,7 @@ public class IO_Manager implements Printable
         
         int counter = 1;
         outputStream.print("Your starting balance was ");
-        writeMoneyToFile(money, outputStream);
+        writeMoneyToFile(startBlanace, outputStream);
         outputStream.println("\n");
         outputStream.println("You purchased:");
         for (int i = 0; i < cart.size(); i++)
@@ -182,17 +188,32 @@ public class IO_Manager implements Printable
                 counter++;
             }
         }
+
+        counter = 1; // reset counter
+        outputStream.println("\nYou did not have enought moeny for: ");
+        for (int i = 0; i < cart.size(); i++)
+        {
+            Item currentItem = cart.get(i);
+            if (!currentItem.getPurchased())
+            {
+                outputStream.println(counter + ") " + currentItem.getName());
+                outputStream.print("\t" + currentItem.getQuantity() + " @ ");
+                writeMoneyToFile(currentItem.getPrice(), outputStream);
+                outputStream.println();
+                counter++;
+            }
+        }
+
+        outputStream.print("\nYour remaining balance is ");
+        writeMoneyToFile(endBalance, outputStream);
+
         outputStream.close();
     }
 
     private static void writePositiveToFile(double amount, PrintWriter currentFile)
     /*
-    NOTE: This method is from Listing 6.14 in Chapter 6 
-    of the Walter Savitch Java textbook.
-    Precondition: amount >= 0
-    Displays amonut in dollars and cents notation.
-    Rounds after two decinal places.
-    Omits the dollar sign.
+    Modified version of Utilities.writePositive. This version changes the print statements
+    to write to the output text file.
     */
     {
         int allCents = (int)(Math.round(amount * 100));
@@ -209,11 +230,8 @@ public class IO_Manager implements Printable
 
     public static void writeMoneyToFile(double amount, PrintWriter currentFile)
     /*
-    NOTE: This method is from Listing 6.14 in Chapter 6
-    of the Walter Savitch Java textbook. 
-    Displays amount in dollars and cents notation i.e. $##.##
-    Rounds after two decimal places.
-    Does not advance to the next line after input.
+    Modified version of Utilities.writeMoney. This version prints to the output
+    .txt file instead of the console. 
     */
     {
         if (amount >= 0)

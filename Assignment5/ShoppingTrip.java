@@ -133,8 +133,6 @@ public class ShoppingTrip
             }
         }
         
-        io.writePurchased(shoppingCart, budget);
-        
         // print purchased items
         io.printLine("\nOkay " + name + ", it's time to checkout.");
         io.printSingle("Your starting balance was ");
@@ -175,5 +173,7 @@ public class ShoppingTrip
         io.printSingle("\nYour remaining balance is ");
         Utilities.writeMoney(balance);
         System.out.println("\n");
+
+        io.writeReceipt(shoppingCart, budget, balance);
     }
 }
