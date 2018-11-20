@@ -1,5 +1,8 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
 import java.lang.NumberFormatException;
 import java.lang.StringIndexOutOfBoundsException;
 
@@ -148,6 +151,80 @@ public class IO_Manager implements Printable
         } catch (BadInputException e) {
             printLine(e.getMessage());
             return "!";
+        }
+    }
+
+    public void writePurchased(ArrayList<Item> cart, double money)
+    {
+        String filename = "receipt.txt";
+        PrintWriter outputStream = null;
+        try
+        {
+            outputStream = new PrintWriter(filename);
+        } catch (FileNotFoundException e) {
+            Utilities.quitProgram(e.getMessage());
+        }
+        
+        int counter = 1;
+        outputStream.print("Your starting balance was ");
+        writeMoneyToFile(money, outputStream);
+        outputStream.println("\n");
+        outputStream.println("You purchased:");
+        for (int i = 0; i < cart.size(); i++)
+        {
+            Item currentItem = cart.get(i);
+            if (currentItem.getPurchased())
+            {
+                outputStream.println(counter + ") " + currentItem.getName());
+                outputStream.print("\t" + currentItem.getQuantity() + " @ ");
+                writeMoneyToFile(currentItem.getPrice(), outputStream);
+                outputStream.println();
+                counter++;
+            }
+        }
+        outputStream.close();
+    }
+
+    private static void writePositiveToFile(double amount, PrintWriter currentFile)
+    /*
+    NOTE: This method is from Listing 6.14 in Chapter 6 
+    of the Walter Savitch Java textbook.
+    Precondition: amount >= 0
+    Displays amonut in dollars and cents notation.
+    Rounds after two decinal places.
+    Omits the dollar sign.
+    */
+    {
+        int allCents = (int)(Math.round(amount * 100));
+        int dollars = allCents / 100;
+        int cents = allCents % 100;
+
+        currentFile.print(dollars);
+        currentFile.print('.');
+
+        if (cents < 10)
+            currentFile.print('0');
+        currentFile.print(cents);
+    }
+
+    public static void writeMoneyToFile(double amount, PrintWriter currentFile)
+    /*
+    NOTE: This method is from Listing 6.14 in Chapter 6
+    of the Walter Savitch Java textbook. 
+    Displays amount in dollars and cents notation i.e. $##.##
+    Rounds after two decimal places.
+    Does not advance to the next line after input.
+    */
+    {
+        if (amount >= 0)
+        {
+            currentFile.print('$');
+            writePositiveToFile(amount, currentFile);
+        } else {
+            double positiveAmount = amount * - 1;
+            currentFile.print('$');
+            currentFile.print('-');
+            writePositiveToFile(positiveAmount, currentFile);
         }
     }
 }
