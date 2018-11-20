@@ -69,7 +69,7 @@ public class Utilities
     
     public static void selectionSort(ArrayList<Item> cart)
     /**
-    Sorts the array into ascending order.
+    Sorts the array into ascending order by its priority.
     Every element in cart must have a value
     */
     {
@@ -150,4 +150,6 @@ public class Utilities
             writePositive(positiveAmount);
         }
     }
+
+    
 }   
