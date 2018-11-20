@@ -4,7 +4,7 @@ public class ShoppingTrip
 {
     public static void main(String[] args)
     {
-        final int NUM_ITEMS = 3; // Change to 7 before final submission!!
+        final int NUM_ITEMS = 7;
         ArrayList<Item> shoppingCart = new ArrayList<>(NUM_ITEMS);
         IO_Manager io = new IO_Manager();
         String name;
@@ -68,7 +68,7 @@ public class ShoppingTrip
                     shoppingCart.add(i, helmet);
                     break;
                 case 'C':
-                    Gear mask = new Gear("FaceMask", 11.99, false);
+                    Gear mask = new Gear("Face Mask", 11.99, false);
                     shoppingCart.add(i, mask);
                     break;
                 case 'D':

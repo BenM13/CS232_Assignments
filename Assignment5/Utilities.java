@@ -6,10 +6,6 @@ import java.lang.StringIndexOutOfBoundsException;
 
 public class Utilities
 {
-    private static int newInt; // for use with inputInt()
-    private static char newChar; // for use with inputChar()
-    private static final String PROMPT = "--> ";
-    private static final String REGEX = "[A-J]"; // pattern for regular expression.
     private static IO_Manager io = new IO_Manager(); 
 
     public static void quitProgram()
@@ -32,40 +28,6 @@ public class Utilities
         System.exit(0);
     }
 
-    public static void checkForExit(String input)
-    /**
-    Checks for the exit conition "--exit".
-    Quits program if input matches conidition
-    */
-    {
-        if (input.equalsIgnoreCase("--exit"))
-        {
-            quitProgram();
-        }
-    }
-
-    public static int inputInt()
-    /*
-    Prompts user for an integer. Takes input as a string.
-    Tries to convert string to an int. Returns 0 if string can't
-    be converted. Otherwise, returns the input as an int. 
-    */
-    {
-        io.printSingle(PROMPT);
-        Scanner keyboard = new Scanner(System.in);
-        String inputString = keyboard.nextLine();
-        io.printLine();
-        try
-        {
-            newInt = Integer.parseInt(inputString);
-        } catch (NumberFormatException e) {
-           io.printLine("ERROR: Must enter a positive whole number.");
-            return 0;
-        }
-        if (newInt <= 0) // priority can't be negative
-            io.printLine("ERROR: Must enter a positive whole number.");
-        return newInt;
-    }
     
     public static void selectionSort(ArrayList<Item> cart)
     /**

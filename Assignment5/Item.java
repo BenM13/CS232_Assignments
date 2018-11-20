@@ -133,7 +133,7 @@ public abstract class Item implements ForSale
                 this.setPrice(34.95);
                 break;
             case 'C':
-                this.name = "Face mask";
+                this.name = "Face Mask";
                 this.setPrice(11.99);
                 break;
             case 'D':

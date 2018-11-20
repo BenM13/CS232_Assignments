@@ -82,7 +82,7 @@ public class IO_Manager implements Printable
         Scanner keyboard = new Scanner(System.in);
         printSingle(PROMPT);
         String inputString = keyboard.nextLine().toUpperCase();
-        Utilities.checkForExit(inputString);
+        checkForExit(inputString);
         try
         {
             newChar = inputString.charAt(0);
@@ -110,7 +110,7 @@ public class IO_Manager implements Printable
         printSingle(PROMPT);
         Scanner keyboard = new Scanner(System.in);
         String inputString = keyboard.nextLine();
-        Utilities.checkForExit(inputString);
+        checkForExit(inputString);
         printLine();
         try
         {
@@ -140,7 +140,7 @@ public class IO_Manager implements Printable
         printSingle(PROMPT);
         Scanner keyboard = new Scanner(System.in);
         String inputString = keyboard.nextLine();
-        Utilities.checkForExit(inputString);
+        checkForExit(inputString);
         try
         {
             if (!Pattern.matches(REGEX_NAME, inputString))

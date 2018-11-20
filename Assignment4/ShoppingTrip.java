@@ -52,7 +52,7 @@ public class ShoppingTrip
                     shoppingCart[i] = helmet;
                     break;
                 case 'C':
-                    Gear mask = new Gear("FaceMask", 11.99, false);
+                    Gear mask = new Gear("Face Mask", 11.99, false);
                     shoppingCart[i] = mask;
                     break;
                 case 'D':
