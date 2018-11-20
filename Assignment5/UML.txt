@@ -1,0 +1,65 @@
+CLASS: Item implements ForSale
+    - Attributes:
+        -- int priority
+        -- double price
+        -- String name
+        -- boolean purchased
+    Methods:
+        -- Contructor
+        -- setPriority
+        -- setPrice
+        -- setPurchased // change the status of purchased
+        -- abctract equals, //check for duplicates for both name and priority
+        -- get methods for each attribue
+
+INTERFACE: ForSale
+    Methods:
+        -- equals
+        -- setPriority
+        -- setPrice
+        -- setPurchased
+        -- check array
+        -- get Priority, price, purchased
+
+INTERFACE: Printable
+    Methods:
+        --printLine // equivalent to System.out.println
+        --printSingle // equivalent to System.out.print
+
+CLASS: Gear extends Items implements ForSale
+    Attributes:
+        -- boolean, condition // is it new or used
+    Methods:
+        -- equals overriding Item method
+        -- Set condition
+        -- get condition
+
+CLASS: Shop service extends Item
+    Atrributes:
+        -- int daysInShop // how long it will take to complete the service
+    Methods:
+        --equals
+        -- setDaysInShop
+        -- getDaysInShop    
+
+CLASS: Utilities
+    - Attributes:
+        -- IO_Manager io
+    - Methods:
+        -- static print money format (from textbook)
+        -- static quitProgram
+        -- static sort array of items
+        -- check for exit condition
+
+CLASS IO_Manager implements Printable
+    - Attributes
+        -- String regex pattern for name
+        -- String regex pattern for item selection
+    Methods:
+        -- printLine
+        -- printSingle
+        -- inputChar
+        -- inputInt
+        -- inputString
+        -- write receipt
+        

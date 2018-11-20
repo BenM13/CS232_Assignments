@@ -1,0 +1,61 @@
+TEST CASES
+----------------------------------
+>>>> Multiple quantity
+With assignment 5, the program will now allow users to purchase multiple quantities
+of an item. Using the same methods for checking the priority input, the user will be
+prompted to re-enter the quantity until a valid integer is given. 
+
+When purchasing items of multiple quantities, the program will buy all or buy nothing 
+when it comes to budget. Meaning, the user does not have enough money for every quantity
+of an item, that entire item is skipped. For example, if we run the program for only 1 item
+a budget of $50 and we try to purchase 5 ski helmets, this will happen:
+'''
+Okay Ben, it's time to checkout.
+Your starting balance was $50.00
+You purchased:
+
+You did not have enough money for:
+1) Used Helmet
+        5 @ $34.95
+'''
+----------------------------------
+
+>>>> Multiple priority
+The condition requiring all items to have unique priorities has been removed.
+However, the program can still only purchase one item at time. As a result, if 2 or more
+items share the same priority, items will be purchased in the order in which they
+were added to the cart. This is due to the selection sort method that was used.
+The selection sort method loops through the list and only swaps elements if the priority
+is less than the minimum. Therefore, if the priorities are equal, nothing happens
+and the item that was added first maintains its position.
+
+As an example, I set the max number of items to 3, budget to $50
+and ran with the following inputs:
+Face Mask, quantity 1, priority 1,
+Ski gloves, quantity 1, priority 2,
+Hand warmers, quantity 1, priority 1.
+
+The output is as follows:
+'''
+Your starting balance was $50.00
+You purchased:
+1) FaceMask
+        1 @ $11.99
+2) Hand warmers
+        1 @ $4.99
+3) Gloves
+        1 @ $19.98
+'''
+
+----------------------------------
+>>>> NEW! BadInputException
+Previous versions of this program used try-catch blocks, but none of them had a 
+custom made Exception class. This assignment uses BadInputException. The idea here
+is that this exception will be thrown anytime the user doesn not follow the directions
+given. For inuting an integer, there are now two different catch blocks. First, as was the
+case before, we check for NumberFormatException. Java will throw this if the user enters
+something other than an integer. But, what if the user enters an valid integer, but it's
+value is not what we're looking for? When prompting for both priority and quanitity, we do 
+not want zeroes or negative numbers. To solve this, we add in if statement that checks if
+the integer is zero or negative. If it is, we throw the new BadInputException and handle
+it in a separate catch block. 
