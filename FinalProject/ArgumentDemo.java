@@ -11,10 +11,14 @@ public class ArgumentDemo
         flags.put("--viewed", "viewed = 1");
         flags.put("--completed", "completed = 1");
 
-        System.out.println("Courses:");
-        System.out.println(Utilities.formatCourses(args));
+        String[] parts = {Utilities.formatCourses(args), Utilities.formatFlags(args, flags), 
+                          Utilities.formatOptIn(args)};
 
-        System.out.println("\nFlag options:");
-        System.out.println(Utilities.formatFlags(args, flags));
+        for (String s: parts)
+        {
+            System.out.println(s);
+        }
+
+        System.out.println(Utilities.buildQuery(parts));
     }
 }

@@ -2,6 +2,8 @@
 Python script to import data from Excel tables into SQLite database.
 Requires .db file and 3 .xlsx files in the same directory as this script.
 The .db file is passed as a positional argument. 
+
+This script should be called as "python3 add_to_table.py DB_NAME"
 """
 
 from sys import argv

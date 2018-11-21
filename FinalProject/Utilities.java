@@ -27,8 +27,8 @@ public class Utilities
     Parses through the args array searching for course numbers. 
     Any argument that does not start with a dash '-' is assumed to be a 
     course number. While looping through the array, this method uses
-    a StringBuilder to construct a tuple of course number seperated by
-    a comma. The return is a String in such as "(COURSE1, COURSE2,... COURSEn)"
+    a StringBuilder to construct a tuple of course numbers seperated by
+    a comma. The return is a String such as "(COURSE1, COURSE2, ... COURSEn)"
     */
     {
         StringBuilder sb = new StringBuilder();
@@ -52,22 +52,42 @@ public class Utilities
     public static String formatFlags(String[] args, HashMap<String, String> dict)
     {
         StringBuilder sb = new StringBuilder();
-        boolean atBeginning = true;
+        sb.append("");
         for (String s: args)
         {
             if ((s.charAt(0) == '-') && (!s.equalsIgnoreCase("--opt_in")))
             {
                 String value = dict.get(s);
-                if (atBeginning)
+                if (value != null)
                 {
-                    sb.append(String.format("%s", value));
-                    atBeginning = false;
-                } else {
                     sb.append(String.format(" AND %s", value));
                 }
             }
         }
         return String.format("%s", sb.toString());
+    }
+
+    public static String formatOptIn(String[] args)
+    {
+        String statement = "";
+        for (String s: args)
+        {
+            if (s.equalsIgnoreCase("--opt_in"))
+            {
+                statement = " WHERE email_opt_in = 1";
+                break;
+            }
+        }
+        return statement;
+    }
+
+    public static String buildQuery(String[] options)
+    {
+        String query = "SELECT c.student_id AS id, c.course_number AS course, " +
+                       "students.student_name AS student, students.student_email AS email " +
+                       "FROM (SELECT * FROM courses_taken WHERE course_number IN %s %s) c " +
+                       "JOIN students ON students.student_id = c.student_id %s";
+        return String.format(query, options[0], options[1], options[2]);
     }
 
     public static void quitProgram()

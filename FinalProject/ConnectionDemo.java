@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.sql.SQLException;
 
 public class ConnectionDemo
@@ -13,17 +14,21 @@ public class ConnectionDemo
 
         SQLiteConnection db = new SQLiteConnection();
         
-        
-        if (Utilities.checkForFlag(args, "-help"))
+        if (Utilities.checkForFlag(args, "--help"))
         {
             System.out.println("You asked for help.");
             System.out.println("Unfortunately I have no answers.");
             Utilities.quitProgram();
         }
 
+        String[] parts = {Utilities.formatCourses(args), Utilities.formatFlags(args, flags), 
+                          Utilities.formatOptIn(args)};
+
+        String query = Utilities.buildQuery(parts);
+
         db.createConnection();
-        // db.runQuery(query);
-        // db.printResults();
+        db.runQuery(query);
+        db.printResults();
         db.closeConnection();
     }
 }

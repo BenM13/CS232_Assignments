@@ -18,7 +18,7 @@ public class SQLiteConnection
     current directory.
     */
     {
-        this.URL = "jdbc:sqlite:test2.db";
+        this.URL = "jdbc:sqlite:test.db";
         this.conn = null;
         this.stmt = null;
         this.results = null;
@@ -89,10 +89,10 @@ public class SQLiteConnection
         {
             while (results.next())
             {
-                System.out.println(results.getString("student_id") + "\t" +
-                                   results.getString("student_name") + "\t" +
-                                   results.getString("student_email") + "\t" +
-                                   results.getBoolean("email_opt_in"));
+                System.out.println(results.getString("id") + "\t" +
+                                   results.getString("course") + "\t" +
+                                   results.getString("student") + "\t" +
+                                   results.getString("email"));
             }
         } catch (SQLException e) {
             System.out.println("Unable to retrieve results:");
