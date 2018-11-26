@@ -18,12 +18,12 @@ CREATE INDEX idx_semester ON course_list(semester);
 CREATE TABLE courses_taken (
     student_id VARCHAR(20),
     course_number VARCHAR(20),
-    payed BOOLEAN,
+    paid BOOLEAN,
     viewed BOOLEAN,
     completed BOOLEAN,
     PRIMARY KEY (student_id, course_number)
 );
 
-CREATE INDEX idx_payed ON courses_taken(payed);
+CREATE INDEX idx_paid ON courses_taken(paid);
 CREATE INDEX idx_viewed ON courses_taken(viewed);
 CREATE INDEX idx_completed ON courses_taken(completed);

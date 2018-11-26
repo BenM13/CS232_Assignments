@@ -3,7 +3,7 @@ Python script to import data from Excel tables into SQLite database.
 Requires .db file and 3 .xlsx files in the same directory as this script.
 The .db file is passed as a positional argument. 
 
-This script should be called as "python3 add_to_table.py DB_NAME"
+This script should be called as "python3 add_to_table.py DB_FILE"
 """
 
 from sys import argv
@@ -73,13 +73,13 @@ def add_courses_taken(conn, filename):
     for row in range(1, worksheet.nrows):
         student_id = worksheet.row_values(row)[0]
         course_number = worksheet.row_values(row)[1]
-        reg_mode = worksheet.row_values(row)[2]
+        paid = worksheet.row_values(row)[2]
         viewed = int(worksheet.row_values(row)[3])
         completed = int(worksheet.row_values(row)[4])
         try:
             count += 1
             cur.execute("INSERT INTO courses_taken VALUES (?, ?, ?, ?, ?)",
-                        (student_id, course_number, reg_mode, viewed, completed))
+                        (student_id, course_number, paid, viewed, completed))
         except sqlite3.OperationalError as e:
             print("There is a problem with the query:")
             print(e)

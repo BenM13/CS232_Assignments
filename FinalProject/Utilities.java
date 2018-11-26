@@ -50,14 +50,20 @@ public class Utilities
     }
 
     public static String formatFlags(String[] args, HashMap<String, String> dict)
+    /**
+    Parses through the args array searching for flags. Any argument with beginning
+    with a dash '-' is assumed to be a flag. Skips the "--opt_in flag", this flag is 
+    addressed in the formatOptIn() method. formats arguments with corresponding value
+    from HashMap. 
+    */
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("");
+        // sb.append("");
         for (String s: args)
         {
-            if ((s.charAt(0) == '-') && (!s.equalsIgnoreCase("--opt_in")))
+            if ((s.charAt(0) == '-') && (!s.replaceAll("-", "").equalsIgnoreCase("opt_in")))
             {
-                String value = dict.get(s);
+                String value = dict.get(s.replaceAll("-", ""));
                 if (value != null)
                 {
                     sb.append(String.format(" AND %s", value));
@@ -68,11 +74,17 @@ public class Utilities
     }
 
     public static String formatOptIn(String[] args)
+    /** 
+    Checks the argument array for the opt_in flag. 
+    If the opt_in flag is present, returns its corresponding
+    query clause. Otherwise returns a blank string.
+    */
     {
         String statement = "";
         for (String s: args)
         {
-            if (s.equalsIgnoreCase("--opt_in"))
+            s = s.replaceAll("-", "");
+            if (s.equalsIgnoreCase("opt_in"))
             {
                 statement = " WHERE email_opt_in = 1";
                 break;
@@ -82,6 +94,10 @@ public class Utilities
     }
 
     public static String buildQuery(String[] options)
+    /**
+    Takes an array of Strings as its argument. These strings will be 
+    used to fill the place holders within the query.
+    */
     {
         String query = "SELECT c.student_id AS id, c.course_number AS course, " +
                        "students.student_name AS student, students.student_email AS email " +
@@ -91,6 +107,9 @@ public class Utilities
     }
 
     public static void quitProgram()
+    /**
+    Safely exits the program 
+    */
     {
         System.out.println("Now exiting...goodbye!");
         System.exit(0);
