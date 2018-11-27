@@ -42,7 +42,7 @@ public class SQLiteConnection
         try
         {
             conn = DriverManager.getConnection(URL);
-            System.out.println("Successfully connected to the database!");
+            System.out.println("Connection established.");
         } catch (SQLException e) {
             System.out.println("Error: Unable to connect to database:");
             System.out.println("\t" + e.getMessage());
@@ -66,6 +66,7 @@ public class SQLiteConnection
             System.out.println("\t" + e.getMessage());
         }
     }
+    
     public void closeConnection()
     {
         try
@@ -85,11 +86,14 @@ public class SQLiteConnection
 
     public void printResults()
     {
+        FileOutput exporter = new FileOutput();
+        exporter.openFile();
         try
         {
+            exporter.writeLine("id\tcourse\tstudent\temail");
             while (results.next())
             {
-                System.out.println(results.getString("id") + "\t" +
+                exporter.writeLine(results.getString("id") + "\t" +
                                    results.getString("course") + "\t" +
                                    results.getString("student") + "\t" +
                                    results.getString("email"));
@@ -98,5 +102,6 @@ public class SQLiteConnection
             System.out.println("Unable to retrieve results:");
             System.out.println("\t" + e.getMessage());
         }
+        exporter.closeFile();
     }
 }
