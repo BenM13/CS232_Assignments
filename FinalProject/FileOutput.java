@@ -39,4 +39,14 @@ public class FileOutput
         outputStream.println(line);
     }
 
+    public void setFilename(String newFile)
+    {
+        filename = newFile;
+    }
+
+    public void getFilename()
+    {
+        return filename;
+    }
+
 }

@@ -4,7 +4,7 @@ public class Utilities
 {
     public static boolean checkForFlag(String[] args, String flag)
     /** 
-    Takees an array of command line arguemtns as the method
+    Takes an array of command line arguemtns as the method
     argument, as well as the flag to search for as a string.
     Loops through the argument array. Returns true if flag
     matches one of the arguments. 
@@ -22,6 +22,19 @@ public class Utilities
         return matches;
     }
 
+    public static boolean checkExtension(String argument)
+    /**
+    Checks if the given String contains a .txt or .csv extension.
+    */
+    {
+        boolean matches = false;
+        if (argument.contains(".txt") || argument.contains(".csv"))
+        {
+            matches = true;
+        }
+        return matches;
+    }
+
     public static String formatCourses(String[] args)
     /** 
     Parses through the args array searching for course numbers. 
@@ -29,13 +42,16 @@ public class Utilities
     course number. While looping through the array, this method uses
     a StringBuilder to construct a tuple of course numbers seperated by
     a comma. The return is a String such as "(COURSE1, COURSE2, ... COURSEn)"
+    If args contains no course numbers, returns "= course_number", which will
+    search for all course numbers when added to the query.
     */
     {
         StringBuilder sb = new StringBuilder();
         boolean atBeginning = true;
+        int counter = 0; // number of courses added to string builder
         for (String s: args)
         {
-            if (s.charAt(0) != '-')
+            if ((s.charAt(0) != '-') && (!checkExtension(s)))
             {
                 if (atBeginning)
                 {
@@ -44,9 +60,15 @@ public class Utilities
                 } else {
                     sb.append(String.format(", '%s'", s));
                 }
+                counter++;
             }
         }
-        return String.format("(%s)", sb.toString());
+        if (counter > 0)
+        {
+            return String.format("IN (%s)", sb.toString());
+        } else {
+            return "= course_number";
+        }
     }
 
     public static String formatFlags(String[] args, HashMap<String, String> dict)
@@ -58,7 +80,6 @@ public class Utilities
     */
     {
         StringBuilder sb = new StringBuilder();
-        // sb.append("");
         for (String s: args)
         {
             if ((s.charAt(0) == '-') && (!s.replaceAll("-", "").equalsIgnoreCase("opt_in")))
@@ -101,7 +122,7 @@ public class Utilities
     {
         String query = "SELECT c.student_id AS id, c.course_number AS course, " +
                        "students.student_name AS student, students.student_email AS email " +
-                       "FROM (SELECT * FROM courses_taken WHERE course_number IN %s %s) c " +
+                       "FROM (SELECT * FROM courses_taken WHERE course_number %s %s) c " +
                        "JOIN students ON students.student_id = c.student_id %s";
         return String.format(query, options[0], options[1], options[2]);
     }
