@@ -35,6 +35,20 @@ public class Utilities
         return matches;
     }
 
+    public static String getOutputFile(String[] args)
+    {
+        String filename = null;
+        for (String s: args)
+        {
+            if (s.contains(".txt") || s.contains(".csv"))
+            {
+                filename = s;
+                break;
+            }
+        }
+        return filename;
+    }
+
     public static String formatCourses(String[] args)
     /** 
     Parses through the args array searching for course numbers. 

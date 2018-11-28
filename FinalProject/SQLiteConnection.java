@@ -68,6 +68,9 @@ public class SQLiteConnection
     }
     
     public void closeConnection()
+    /** 
+    Closes the statement and connection objects
+    */
     {
         try
         {
@@ -84,9 +87,23 @@ public class SQLiteConnection
         }
     }
 
-    public void printResults()
+    public void printResults(String[] args)
+    /** 
+    Creates an object of the FileOutput class.
+    If user provided an output file name, that name is passed
+    to the constructor. Otherwise, default constructor is used. 
+    Uses this new object to create an output file
+    and write the results of the query to that file.
+    */
     {
-        FileOutput exporter = new FileOutput();
+        String outputFile = Utilities.getOutputFile(args);
+        FileOutput exporter;
+        if (outputFile != null)
+        {
+            exporter = new FileOutput(outputFile);
+        } else {
+            exporter = new FileOutput();
+        }
         exporter.openFile();
         try
         {

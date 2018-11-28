@@ -7,18 +7,30 @@ public class FileOutput
     private PrintWriter outputStream;
 
     public FileOutput()
+    /**
+    Default constructor. If the user does not provide
+    a name for the output file, program will automatically
+    send output to "results.csv".
+    */
     {
-        filename = "sampleOutput.csv";
+        filename = "results.csv";
         outputStream = null;
     }
 
     public FileOutput(String initFile)
+    /**
+    Constructor of when user provides output file name 
+    */
     {
         filename = initFile;
         outputStream = null;
     }
 
     public void openFile()
+    /**
+    Instantiates output file name. 
+    Exits program if an exception is thrown while opening
+    */
     {
         try
         {
@@ -30,6 +42,9 @@ public class FileOutput
     }
 
     public void closeFile()
+    /**
+    Closes the outputStream object 
+    */
     {
         outputStream.close();
     }
@@ -44,7 +59,7 @@ public class FileOutput
         filename = newFile;
     }
 
-    public void getFilename()
+    public String getFilename()
     {
         return filename;
     }
