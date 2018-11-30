@@ -36,6 +36,11 @@ public class Utilities
     }
 
     public static String getOutputFile(String[] args)
+    /**
+    Parses through args array searching for the first 
+    argument that ends with .txt or .csv. Returns a null
+    String if no filename can be found.
+    */
     {
         String filename = null;
         for (String s: args)
@@ -128,17 +133,19 @@ public class Utilities
         return statement;
     }
 
-    public static String buildQuery(String[] options)
+    public static String buildQuery(String[] args, HashMap<String, String> flags)
     /**
     Takes an array of Strings as its argument. These strings will be 
     used to fill the place holders within the query.
     */
     {
+        
         String query = "SELECT c.student_id AS id, c.course_number AS course, " +
                        "students.student_name AS student, students.student_email AS email " +
                        "FROM (SELECT * FROM courses_taken WHERE course_number %s %s) c " +
                        "JOIN students ON students.student_id = c.student_id %s";
-        return String.format(query, options[0], options[1], options[2]);
+        return String.format(query, formatCourses(args), formatFlags(args, flags), 
+                             formatOptIn(args));
     }
 
     public static void quitProgram()

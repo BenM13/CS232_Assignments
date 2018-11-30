@@ -10,7 +10,9 @@ public class ConnectionDemo
         flags.put("paid", "paid = 1");
         flags.put("audit", "paid = 0");
         flags.put("viewed", "viewed = 1");
+        flags.put("not_viewed", "viewed = 0");
         flags.put("completed", "completed = 1");
+        flags.put("not_completed", "completed = 0");
 
         SQLiteConnection db = new SQLiteConnection();
         
@@ -21,10 +23,7 @@ public class ConnectionDemo
             Utilities.quitProgram();
         }
 
-        String[] parts = {Utilities.formatCourses(args), Utilities.formatFlags(args, flags), 
-                          Utilities.formatOptIn(args)};
-
-        String query = Utilities.buildQuery(parts);
+        String query = Utilities.buildQuery(args, flags);
 
         db.createConnection();
         db.runQuery(query);

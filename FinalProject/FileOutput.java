@@ -17,12 +17,12 @@ public class FileOutput
         outputStream = null;
     }
 
-    public FileOutput(String initFile)
+    public FileOutput(String initName)
     /**
     Constructor of when user provides output file name 
     */
     {
-        filename = initFile;
+        filename = initName;
         outputStream = null;
     }
 
