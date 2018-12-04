@@ -124,7 +124,7 @@ public class Utilities
         StringBuilder sb = new StringBuilder();
         for (String s: args)
         {
-            if ((s.charAt(0) == '-') && (!checkForFlag(args, "opt_in", "op")))
+            if ((s.charAt(0) == '-') && (!checkForFlag(args, "opt_in", "oi")))
             {
                 String value = dict.get(s.replaceAll("-", ""));
                 if (value != null)
@@ -147,7 +147,7 @@ public class Utilities
         for (String s: args)
         {
             s = removeDash(s);
-            if (s.equalsIgnoreCase("opt_in"))
+            if (s.equalsIgnoreCase("opt_in") || s.equalsIgnoreCase("oi"))
             {
                 statement = " WHERE email_opt_in = 1";
                 break;

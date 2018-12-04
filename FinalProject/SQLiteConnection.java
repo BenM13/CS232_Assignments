@@ -3,6 +3,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.lang.NullPointerException;
 
 public class SQLiteConnection
 {
@@ -117,6 +118,9 @@ public class SQLiteConnection
             }
         } catch (SQLException e) {
             System.out.println("Unable to retrieve results:");
+            System.out.println("\t" + e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Unable to retrieve results");
             System.out.println("\t" + e.getMessage());
         }
         exporter.closeFile();
