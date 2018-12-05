@@ -1,9 +1,12 @@
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class FileOutput
 {
     private String filename;
+    private FileWriter file;
     private PrintWriter outputStream;
 
     public FileOutput()
@@ -15,6 +18,7 @@ public class FileOutput
     {
         filename = "results.csv";
         outputStream = null;
+        file = null;
     }
 
     public FileOutput(String initName)
@@ -23,6 +27,7 @@ public class FileOutput
     */
     {
         filename = initName;
+        file = null;
         outputStream = null;
     }
 
@@ -38,6 +43,23 @@ public class FileOutput
         } catch (FileNotFoundException e) {
             System.out.println("Error opening the file" + filename);
             Utilities.quitProgram();
+        }
+    }
+
+    public void openLog()
+    /**
+    Instantiaties FileWriter object with append option set to true.
+    Instantiaties PrintWriter ojbect using the FileWriter
+    Exits program if an exception is thrown.
+    */
+    {
+        try
+        {
+            file = new FileWriter(filename, true); // use append mode
+            outputStream = PrintWriter(file);
+        } catch (IOException e) {
+            System.out.println("Error opening the log file");
+            Utilties.quitProgram();
         }
     }
 

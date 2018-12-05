@@ -1,19 +1,42 @@
 import java.util.HashMap;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Utilities
 {
-    public static boolean checkForFlag(String[] args, String flag)
+     public static boolean checkForFlag(String[] args, String flag)
     /** 
     Takes an array of command line arguemtns as the method
-    argument, as well as the flag to search for as a string.
+    argument, as well a single flag to search for as a string.
     Loops through the argument array. Returns true if flag
     matches one of the arguments. 
     */
     {
         boolean matches = false;
-        for (int i = 0; i < args.length; i++)
+        for (String s: args)
         {
-            if (args[i].equalsIgnoreCase(flag))
+            if (removeDash(s).equalsIgnoreCase(flag))
+            {
+                matches = true;
+                break;
+            }
+        }
+        return matches;
+    }
+    
+    public static boolean checkForFlag(String[] args, String flag1, String flag2)
+    /** 
+    Takes an array of command line arguemtns as the method
+    argument, as well as 2 versions of a flag to search for as a string.
+    Loops through the argument array. Returns true if flag
+    matches one of the arguments. 
+    */
+    {
+        boolean matches = false;
+        for (String s: args) 
+        {
+            if (removeDash(s).equalsIgnoreCase(flag1) || 
+                removeDash(s).equalsIgnoreCase(flag2))
             {
                 matches = true;
                 break;
@@ -101,7 +124,7 @@ public class Utilities
         StringBuilder sb = new StringBuilder();
         for (String s: args)
         {
-            if ((s.charAt(0) == '-') && (!s.replaceAll("-", "").equalsIgnoreCase("opt_in")))
+            if ((s.charAt(0) == '-') && (!checkForFlag(args, "opt_in", "oi")))
             {
                 String value = dict.get(s.replaceAll("-", ""));
                 if (value != null)
@@ -123,8 +146,8 @@ public class Utilities
         String statement = "";
         for (String s: args)
         {
-            s = s.replaceAll("-", "");
-            if (s.equalsIgnoreCase("opt_in"))
+            s = removeDash(s);
+            if (s.equalsIgnoreCase("opt_in") || s.equalsIgnoreCase("oi"))
             {
                 statement = " WHERE email_opt_in = 1";
                 break;
@@ -146,6 +169,29 @@ public class Utilities
                        "JOIN students ON students.student_id = c.student_id %s";
         return String.format(query, formatCourses(args), formatFlags(args, flags), 
                              formatOptIn(args));
+    }
+    
+    public static String getTimestamp()
+    /**
+    Returns the current date and time as a String 
+    */
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        Date today = new Date();
+        return formatter.format(today);
+    }
+
+    public static String removeDash(String s)
+    /**
+    Removes dash characters '-' from the beginning of a string
+    */
+    {
+        if (s.charAt(0) != '-')
+        {
+            return s;
+        } else {
+            return removeDash(s.substring(1));
+        }
     }
 
     public static void quitProgram()
