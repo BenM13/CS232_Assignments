@@ -11,6 +11,7 @@ public class SQLiteConnection
     private Connection conn;
     private Statement stmt;
     private ResultSet results;
+    private final String logFilename;
 
     public SQLiteConnection()
     /**
@@ -20,6 +21,7 @@ public class SQLiteConnection
     */
     {
         this.URL = "jdbc:sqlite:test.db";
+        this.logFilename = "sql_log.txt";
         this.conn = null;
         this.stmt = null;
         this.results = null;
@@ -28,6 +30,7 @@ public class SQLiteConnection
     public SQLiteConnection(String initURL)
     {
         this.URL = initURL;
+        this.logFilename = "sql_log.txt";
         this.conn = null;
         this.stmt = null;
         this.results = null;
@@ -40,14 +43,21 @@ public class SQLiteConnection
     the SQLiteConnection class
     */
     {
+        FileOutput logger = new FileOutput(logFilename);
+        logger.openLog();
         try
         {
             conn = DriverManager.getConnection(URL);
             System.out.println("Connection established.");
+            logger.writeLine(Utilities.getTimestamp() + " -  Connection established.");
         } catch (SQLException e) {
             System.out.println("Error: Unable to connect to database:");
+            logger.writeLine(Utilities.getTimestamp() +
+                             " - Error: Unable to connect to database:");
             System.out.println("\t" + e.getMessage());
+            logger.writeLine("\t" + e.getMessage());
         }
+        logger.closeFile();
     }
 
     public void runQuery(String query)
@@ -57,15 +67,22 @@ public class SQLiteConnection
     SQLiteConnection class
     */
     {
+        FileOutput logger = new FileOutput(logFilename);
+        logger.openLog();
         try
         {
             stmt = conn.createStatement();
             results = stmt.executeQuery(query);
             System.out.println("Executing query...");
+            logger.writeLine(Utilities.getTimestamp() + " - Executing query...");
         } catch (SQLException e) {
             System.out.println("There was a problem with the query:");
             System.out.println("\t" + e.getMessage());
+            logger.writeLine(Utilities.getTimestamp() + 
+                            " - There was a problem with the query:");
+            logger.writeLine("\t" + e.getMessage());
         }
+        logger.closeFile();
     }
     
     public void closeConnection()
@@ -73,6 +90,8 @@ public class SQLiteConnection
     Closes the statement and connection objects
     */
     {
+        FileOutput logger = new FileOutput(logFilename);
+        logger.openLog();
         try
         {
             if ((conn == null) || (stmt == null))
@@ -81,11 +100,16 @@ public class SQLiteConnection
             } else {
                 conn.close();
                 System.out.println("Connection closed.");
+                logger.writeLine(Utilities.getTimestamp() + " - Connection closed.");
             }
         } catch (SQLException e) {
             System.out.println("Error: Unable to close connection:");
             System.out.println("\t" + e.getMessage());
+            logger.writeLine(Utilities.getTimestamp() + 
+                             " - Error: Unable to closer connection");
+            logger.writeLine("\t" + e.getMessage());
         }
+        logger.closeFile();
     }
 
     public void printResults(String[] args)
@@ -125,4 +149,5 @@ public class SQLiteConnection
         }
         exporter.closeFile();
     }
+
 }

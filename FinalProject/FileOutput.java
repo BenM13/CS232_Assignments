@@ -4,6 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class FileOutput
+/**
+Class for generating output files. This includes query
+results and logs.
+*/
 {
     private String filename;
     private FileWriter file;
@@ -23,7 +27,8 @@ public class FileOutput
 
     public FileOutput(String initName)
     /**
-    Constructor of when user provides output file name 
+    Constructor of when user provides output file name.
+    Also used for creating the log file.
     */
     {
         filename = initName;
@@ -55,11 +60,11 @@ public class FileOutput
     {
         try
         {
-            file = new FileWriter(filename, true); // use append mode
-            outputStream = PrintWriter(file);
+            file = new FileWriter(filename, true); // enable append mode
+            outputStream = new PrintWriter(file);
         } catch (IOException e) {
             System.out.println("Error opening the log file");
-            Utilties.quitProgram();
+            Utilities.quitProgram();
         }
     }
 
@@ -68,7 +73,16 @@ public class FileOutput
     Closes the outputStream object 
     */
     {
-        outputStream.close();
+        try
+        {
+            if (file != null)
+            {
+                file.close();
+            }
+            outputStream.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void writeLine(String line)
