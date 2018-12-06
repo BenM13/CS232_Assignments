@@ -85,9 +85,21 @@ results and logs.
         }
     }
 
-    public void writeLine(String line)
+    public void writeToFile(String line)
+    /**
+    Prints String to output file 
+    */
     {
         outputStream.println(line);
+    }
+    
+    public void writeToAll(String line)
+    /**
+    Prints String to both output file and to console 
+    */
+    {
+        outputStream.println(line);
+        System.out.println(line);
     }
 
     public void setFilename(String newFile)

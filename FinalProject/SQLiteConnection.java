@@ -8,10 +8,10 @@ import java.lang.NullPointerException;
 public class SQLiteConnection
 {
     private final String URL;
+    private final String LOG_NAME;
     private Connection conn;
     private Statement stmt;
     private ResultSet results;
-    private final String logFilename;
 
     public SQLiteConnection()
     /**
@@ -21,7 +21,7 @@ public class SQLiteConnection
     */
     {
         this.URL = "jdbc:sqlite:test.db";
-        this.logFilename = "sql_log.txt";
+        this.LOG_NAME = "sql_log.txt";
         this.conn = null;
         this.stmt = null;
         this.results = null;
@@ -30,7 +30,7 @@ public class SQLiteConnection
     public SQLiteConnection(String initURL)
     {
         this.URL = initURL;
-        this.logFilename = "sql_log.txt";
+        this.LOG_NAME = "sql_log.txt";
         this.conn = null;
         this.stmt = null;
         this.results = null;
@@ -43,19 +43,19 @@ public class SQLiteConnection
     the SQLiteConnection class
     */
     {
-        FileOutput logger = new FileOutput(logFilename);
+        FileOutput logger = new FileOutput(LOG_NAME);
         logger.openLog();
         try
         {
             conn = DriverManager.getConnection(URL);
-            System.out.println("Connection established.");
-            logger.writeLine(Utilities.getTimestamp() + " -  Connection established.");
+            // System.out.println("Connection established.");
+            logger.writeToAll(Utilities.getTimestamp() + " - Connection established.");
         } catch (SQLException e) {
-            System.out.println("Error: Unable to connect to database:");
-            logger.writeLine(Utilities.getTimestamp() +
-                             " - Error: Unable to connect to database:");
-            System.out.println("\t" + e.getMessage());
-            logger.writeLine("\t" + e.getMessage());
+            // System.out.println("Error: Unable to connect to database:");
+            logger.writeToAll(Utilities.getTimestamp() +
+                             " - ERROR: Unable to connect to database:");
+            ///System.out.println("\t" + e.getMessage());
+            logger.writeToAll("\t" + e.getMessage());
         }
         logger.closeFile();
     }
@@ -67,20 +67,20 @@ public class SQLiteConnection
     SQLiteConnection class
     */
     {
-        FileOutput logger = new FileOutput(logFilename);
+        FileOutput logger = new FileOutput(LOG_NAME);
         logger.openLog();
         try
         {
             stmt = conn.createStatement();
             results = stmt.executeQuery(query);
-            System.out.println("Executing query...");
-            logger.writeLine(Utilities.getTimestamp() + " - Executing query...");
+            // System.out.println("Executing query...");
+            logger.writeToAll(Utilities.getTimestamp() + " - Executing query...");
         } catch (SQLException e) {
-            System.out.println("There was a problem with the query:");
-            System.out.println("\t" + e.getMessage());
-            logger.writeLine(Utilities.getTimestamp() + 
+            // System.out.println("There was a problem with the query:");
+            // System.out.println("\t" + e.getMessage());
+            logger.writeToAll(Utilities.getTimestamp() + 
                             " - There was a problem with the query:");
-            logger.writeLine("\t" + e.getMessage());
+            logger.writeToAll("\t" + e.getMessage());
         }
         logger.closeFile();
     }
@@ -90,7 +90,7 @@ public class SQLiteConnection
     Closes the statement and connection objects
     */
     {
-        FileOutput logger = new FileOutput(logFilename);
+        FileOutput logger = new FileOutput(LOG_NAME);
         logger.openLog();
         try
         {
@@ -99,15 +99,12 @@ public class SQLiteConnection
                 throw new SQLException("Connection and/or statement object is null");
             } else {
                 conn.close();
-                System.out.println("Connection closed.");
-                logger.writeLine(Utilities.getTimestamp() + " - Connection closed.");
+                logger.writeToAll(Utilities.getTimestamp() + " - Connection closed.");
             }
         } catch (SQLException e) {
-            System.out.println("Error: Unable to close connection:");
-            System.out.println("\t" + e.getMessage());
-            logger.writeLine(Utilities.getTimestamp() + 
-                             " - Error: Unable to closer connection");
-            logger.writeLine("\t" + e.getMessage());
+            logger.writeToAll(Utilities.getTimestamp() + 
+                             " - ERROR: Unable to closer connection");
+            logger.writeToAll("\t" + e.getMessage());
         }
         logger.closeFile();
     }
@@ -119,10 +116,13 @@ public class SQLiteConnection
     to the constructor. Otherwise, default constructor is used. 
     Uses this new object to create an output file
     and write the results of the query to that file.
+    If query returns no results, a warning message is displayed and
+    written to the log file. 
     */
     {
         String outputFile = Utilities.getOutputFile(args);
         FileOutput exporter;
+        FileOutput logger = new FileOutput(LOG_NAME);
         if (outputFile != null)
         {
             exporter = new FileOutput(outputFile);
@@ -130,24 +130,39 @@ public class SQLiteConnection
             exporter = new FileOutput();
         }
         exporter.openFile();
+        logger.openLog();
+
         try
         {
-            exporter.writeLine("id\tcourse\tstudent\temail");
+            exporter.writeToFile("id\tcourse\tstudent\temail");
+            int counter = 0;
             while (results.next())
             {
-                exporter.writeLine(results.getString("id") + "\t" +
-                                   results.getString("course") + "\t" +
-                                   results.getString("student") + "\t" +
-                                   results.getString("email"));
+                exporter.writeToFile(results.getString("id") + "\t" +
+                                     results.getString("course") + "\t" +
+                                     results.getString("student") + "\t" +
+                                     results.getString("email"));
+                counter++;
+            }
+            if (counter <= 0)
+            {
+                throw new NoResultsException();
             }
         } catch (SQLException e) {
-            System.out.println("Unable to retrieve results:");
-            System.out.println("\t" + e.getMessage());
+            logger.writeToAll(Utilities.getTimestamp() +
+                              " - ERROR: Unable to retrieve results");
+            logger.writeToAll("\t" + e.getMessage());
         } catch (NullPointerException e) {
-            System.out.println("Unable to retrieve results");
-            System.out.println("\t" + e.getMessage());
+            logger.writeToAll(Utilities.getTimestamp() +
+                              " - ERROR: Unable to retrieve results");
+            logger.writeToAll("\t" + e.getMessage());
+        } catch (NoResultsException e) {
+            logger.writeToAll(Utilities.getTimestamp() + " - " + e.getMessage());
+            logger.writeToAll("\tCommand line arguments may be incorrect");
         }
+
         exporter.closeFile();
+        logger.closeFile();
     }
 
 }
