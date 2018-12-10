@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.sql.SQLException;
 
-public class ConnectionDemo
+public class NewQuery
 {
     public static void main(String[] args)
     {
