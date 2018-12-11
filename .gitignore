@@ -6,4 +6,4 @@ pwd
 *.log*
 *.json
 *.csv
-*.txt
+*log.txt

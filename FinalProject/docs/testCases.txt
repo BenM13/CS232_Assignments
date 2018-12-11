@@ -1,0 +1,6 @@
+Position of command line arguments:
+
+Although the documentation instructs the user to call the script with arguments in a certain position,
+the truth, is position does not matter. The following two script calls will actually yield the same result:
+    java NewQuery 101x/FL17 --opt_in
+    java NewQuery --opt_in 101x/FL17
