@@ -1,3 +1,5 @@
+import java.util.Scanner;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
@@ -49,6 +51,27 @@ results and logs.
             System.out.println("Error opening the file" + filename);
             Utilities.quitProgram();
         }
+    }
+
+    public void displayHelp()
+    /**
+    Prints the contens of the README.md file to the screen 
+    */
+    {
+        Scanner inputStream = null;
+        try 
+        {
+            inputStream = new Scanner(new File(filename));
+        } catch (FileNotFoundException e) {
+            Utilities.quitProgram("Could not load help file");
+        }
+
+        while (inputStream.hasNextLine())
+        {
+            String line = inputStream.nextLine();
+            System.out.println(line);
+        }
+        inputStream.close();
     }
 
     public void openLog()

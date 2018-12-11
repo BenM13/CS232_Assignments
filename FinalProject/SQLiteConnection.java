@@ -20,7 +20,7 @@ public class SQLiteConnection
     current directory.
     */
     {
-        this.URL = "jdbc:sqlite:lib/test.db";
+        this.URL = "jdbc:sqlite:lib/warehouse.db";
         this.LOG_NAME = "sql_log.txt";
         this.conn = null;
         this.stmt = null;

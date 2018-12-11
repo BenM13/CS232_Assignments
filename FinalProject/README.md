@@ -7,14 +7,22 @@ The list is outputed to a .csv file
 How to call this script:
     java NewQuery $course_number $output_file $optional_flags
 
-course_number:
-If no course number is chosen, the script will search all classes for the given criteria. Multiple courses may be given seperated by a space
+IMPORTAN: Classpath variable must be set to "lib/sqlite-jdbc-3_23_1.jar" in order for the driver to be found
+If Classpath variable is not set, script should be called as follows:
+    on Unix:        java -cp ":/lib/sqlite-jdbc-3_23_1.jar" NewQuery arguments
+    on Windows:     java -cp ";lib\sqlite-jdbc-3_23_2.jar" NewQuery arguments
+SQLite3 must also be installed
 
-output_file:
+$course_number:
+If no course number is chosen, the script will search all classes for the given criteria. 
+Multiple courses may be given seperated by a space
+For a list of course numbers open file /docs/course_nums.txt
+
+$output_file:
 Should be .txt or .csv filename. If the file aready exists, it will be overwritten.
 If no output file is specified, results will be exported to "results.csv"
 
-optional_flags:
+$optional_flags:
 -h, --help: displays this help message and exits
 -ot, --opt_in: searches for students who have opted in for marketing emails
 -p, --paid: searches for students who have paid for courses

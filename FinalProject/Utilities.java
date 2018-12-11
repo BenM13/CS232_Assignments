@@ -202,4 +202,10 @@ public class Utilities
         System.out.println("Now exiting...goodbye!");
         System.exit(0);
     }
+
+    public static void quitProgram(String message)
+    {
+        System.out.println(message);
+        System.exit(0);
+    }
 }

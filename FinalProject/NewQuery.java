@@ -25,8 +25,8 @@ public class NewQuery
         
         if (Utilities.checkForFlag(args, "help", "h"))
         {
-            System.out.println("You asked for help.");
-            System.out.println("Unfortunately I have no answers.");
+            FileOutput help = new FileOutput("README.md");
+            help.displayHelp();
             Utilities.quitProgram();
         }
 
