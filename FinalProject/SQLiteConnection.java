@@ -140,7 +140,7 @@ public class SQLiteConnection
             {
                 exporter.writeToFile(results.getString("id") + "\t" +
                                      results.getString("course") + "\t" +
-                                     results.getString("student") + "\t" +
+                                     results.getString("name") + "\t" +
                                      results.getString("email"));
                 counter++;
             }

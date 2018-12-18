@@ -37,3 +37,26 @@ Note that this is a warning message as opposed to an error. It is possible that 
 the command line arguments are correct. Perhaps no one passed that particular course.
 -------------------------------------------
 
+Handling junk:
+
+Below is a sample script call and output for when we run the script with junk as the arguments:
+    java NewQuery dkjf982 3kjt0 rj20fe
+```
+12/17/2018 11:36:43 - Connection established.
+12/17/2018 11:36:43 - Executing query...
+12/17/2018 11:36:43 - WARNING: Query yielded no results
+        Command line arguments may be incorrect
+12/17/2018 11:36:43 - Connection closed.
+```
+The query will successfully execute, but will return no results. The custom-made NoResultsException
+will be thrown and a warning message will be displayed on the console and printed to the log. When pasrsing
+the arguments, the program assumes that any argument without a dash character '-' at the beginning must either
+be a course number or a output file. If any of these arguments do not contain a .csv or .txt extension, they 
+will be processed as a course number. The query is desinged to run no matter what is used as course_number; if the
+course number does not exist, the query will simply return no results. 
+
+Handling bad flags, yields a different outcome. If we run the same query again but with this as the call:
+    java NewQuery --dkjf982 --3kjt0 --rj20fe
+the query will with no exceptions. The results file will show that every row from the courses_taken table was returned.
+This is because without a provided course number, the script will search for all courses. Additionally, if the flags
+do not match any in the HashMap, they will simply be ignored. 
