@@ -27,7 +27,7 @@ public class NewQuery
         {
             FileOutput help = new FileOutput("README.md");
             help.displayHelp();
-            Utilities.quitProgram();
+            Utilities.quitProgram("--------------------");
         }
 
         String query = Utilities.buildQuery(args, flags);

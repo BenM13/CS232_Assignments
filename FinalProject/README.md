@@ -30,4 +30,4 @@ $optional_flags:
 -v, --viewed: searches for students who have viewed course materials
 -nv, --not_viewed: searches for students who have not yet viewed any course materials
 -c, --completed: searches for students who passed a course
--nc, --not_viewed: seraches for students who have failed or not completed a course
+-nc, --not_completed: seraches for students who have failed or not completed a course
