@@ -24,7 +24,7 @@ If no output file is specified, results will be exported to "results.csv"
 
 $optional_flags:
 -h, --help: displays this help message and exits
--ot, --opt_in: searches for students who have opted in for marketing emails
+-oi, --opt_in: searches for students who have opted in for marketing emails
 -p, --paid: searches for students who have paid for courses
 -a, --audit: searches for students who have not paid/audited the course
 -v, --viewed: searches for students who have viewed course materials
